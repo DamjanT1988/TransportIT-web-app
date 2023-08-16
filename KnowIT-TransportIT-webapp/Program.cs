@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using KnowIT_TransportIT_webapp.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<BillingContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("BillingContext") ?? throw new InvalidOperationException("Connection string 'BillingContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -22,6 +27,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=}/{action=Index}/{id?}");
 
 app.Run();
