@@ -21,17 +21,26 @@ html {
 
 .btn {
     font-weight: 700;
-    font-size: 1.3em;
+    font-size: 0.85em;
 }
 
 .productImages {
     max-width: 40%;
 }
 
+th {
+    font-size: 0.8em;
+}
+
+.navbar-brand {
+    font: 900;
+    font-size: 3.2em;
+}
+
 
 @media (min-width: 768px) {
     html {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     header {
