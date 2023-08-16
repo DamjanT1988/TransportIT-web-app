@@ -1,18 +1,83 @@
 html {
-  font-size: 14px;
+    font-size: 18px;
+    font-family: 'Arial Narrow', Arial, sans-serif;
 }
 
+.control-label {
+    font-weight: 700;
+    margin-bottom: 7.5px;
+    margin-top: 15px;
+    font-size: 1.2em;
+}
+
+.btn-primary {
+    background-color: navy;
+}
+
+.form-control {
+    font-weight: 100;
+    font-size: 1.35em;
+}
+
+.btn {
+    font-weight: 700;
+    font-size: 1.3em;
+}
+
+.productImages {
+    max-width: 40%;
+}
+
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 20px;
+    }
+
+    header {
+        font-size: 18px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+@media (max-width: 767px) {
+    html, body {
+        font-size: 20px;
+        float: none;
+    }
+
+    .btn {
+        font-weight: 700;
+        font-size: 1.2em;
+    }
+
+    header {
+        font-size: 14px;
+    }
+
+    .productImages {
+        max-width: 60%;
+    }
+
+    .navbar-brand {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 575px) {
+    .navbar-brand {
+        font-size: 28px;
+    }
+
+    header {
+        font-size: 22px;
+    }
 }
