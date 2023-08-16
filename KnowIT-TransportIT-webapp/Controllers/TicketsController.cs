@@ -23,7 +23,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
 
         // GET: api/Tickets
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TicketsClass>>> GetTicketsClass()
+        public async Task<ActionResult<IEnumerable<TicketsModel>>> GetTicketsClass()
         {
           if (_context.TicketsClass == null)
           {
@@ -34,7 +34,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
 
         // GET: api/Tickets/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TicketsClass>> GetTicketsClass(int id)
+        public async Task<ActionResult<TicketsModel>> GetTicketsClass(int id)
         {
           if (_context.TicketsClass == null)
           {
@@ -53,7 +53,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
         // PUT: api/Tickets/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTicketsClass(int id, TicketsClass ticketsClass)
+        public async Task<IActionResult> PutTicketsClass(int id, TicketsModel ticketsClass)
         {
             if (id != ticketsClass.Id)
             {
@@ -84,7 +84,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
         // POST: api/Tickets
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TicketsClass>> PostTicketsClass(TicketsClass ticketsClass)
+        public async Task<ActionResult<TicketsModel>> PostTicketsClass(TicketsModel ticketsClass)
         {
           if (_context.TicketsClass == null)
           {

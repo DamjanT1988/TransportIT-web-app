@@ -14,6 +14,6 @@ namespace KnowIT_TransportIT_webapp.Data
         {
         }
 
-        public DbSet<KnowIT_TransportIT_webapp.Models.TicketsClass> TicketsClass { get; set; } = default!;
+        public DbSet<KnowIT_TransportIT_webapp.Models.TicketsModel> TicketsClass { get; set; } = default!;
     }
 }

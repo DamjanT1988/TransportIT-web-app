@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using KnowIT_TransportIT_webapp.Data;
+using Microsoft.AspNetCore.Identity;
+
 
 //create builder
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,9 @@ builder.Services.AddDbContext<BillingContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Add Razor Pages support.
+builder.Services.AddRazorPages();
+
 //add CORS policy
 builder.Services.AddCors(options =>
 {
@@ -23,8 +28,10 @@ builder.Services.AddCors(options =>
         .AllowAnyHeader());
 });
 
+
 //build the app
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -33,6 +40,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 //use CORS
 app.UseCors("CorsPolicy");
 
@@ -52,10 +60,11 @@ app.UseAuthorization();
 //map the controller routes
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=AdminBilling}/{action=Index}/{id?}");
 
-//map the Razor pages
-app.MapRazorPages();
+    //map the Razor pages
+ app.MapRazorPages();
+
 
 //run the app
 app.Run();

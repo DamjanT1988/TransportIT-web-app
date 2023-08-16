@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace KnowIT_TransportIT_webapp.Models
 {
-    public class TicketsClass
+    public class TicketsModel
     {
         //data fields
         [Display(Name = "Object ID number:")]
