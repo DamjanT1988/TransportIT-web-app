@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using WebApplication2.Models;
+using KnowIT_TransportIT_webapp.Model;
 
 namespace WebApplication2.Controllers
 {

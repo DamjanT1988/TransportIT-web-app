@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using KnowIT_TransportIT_webapp.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<TicketsContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("TicketsContext") ?? throw new InvalidOperationException("Connection string 'TicketsContext' not found.")));
 builder.Services.AddDbContext<BillingContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BillingContext") ?? throw new InvalidOperationException("Connection string 'BillingContext' not found.")));
 
