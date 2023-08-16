@@ -54,17 +54,16 @@ app.UseStaticFiles();
 app.UseRouting();
 
 //use authentication and authorization
-app.UseAuthentication(); ;
+app.UseAuthentication();
 app.UseAuthorization();
+
+//Razor
+app.MapRazorPages();
 
 //map the controller routes
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=AdminBilling}/{action=Index}/{id?}");
-
-    //map the Razor pages
- app.MapRazorPages();
-
+    pattern: "{controller=AdminBillings}/{action=Index}/{id?}");
 
 //run the app
 app.Run();
