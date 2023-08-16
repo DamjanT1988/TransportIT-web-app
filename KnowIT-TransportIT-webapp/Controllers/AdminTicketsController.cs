@@ -7,9 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KnowIT_TransportIT_webapp.Data;
 using KnowIT_TransportIT_webapp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KnowIT_TransportIT_webapp.Controllers
 {
+    //authorize the whole class
+    [Authorize]
+
     public class AdminTicketsController : Controller
     {
         private readonly TicketsContext _context;

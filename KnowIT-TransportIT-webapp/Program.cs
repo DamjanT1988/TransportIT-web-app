@@ -10,8 +10,18 @@ var builder = WebApplication.CreateBuilder(args);
 //create db connection
 builder.Services.AddDbContext<TicketsContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("TicketsContext") ?? throw new InvalidOperationException("Connection string 'TicketsContext' not found.")));
+
 builder.Services.AddDbContext<BillingContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BillingContext") ?? throw new InvalidOperationException("Connection string 'BillingContext' not found.")));
+
+var connectionString = builder.Configuration.GetConnectionString("UserContext") ?? throw new InvalidOperationException("Connection string 'UserContex' not found.");
+builder.Services.AddDbContext<UserContext>(options =>
+    options.UseSqlite(connectionString));
+
+//add sign-in req
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<UserContext>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
