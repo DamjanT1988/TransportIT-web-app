@@ -17,7 +17,7 @@ namespace KnowIT_TransportIT_webapp.Models
 
         [Required]
         [Display(Name = "Unique ticket ID number:")]
-        public string? Ticket_number { get; set; }
+        public int? Ticket_number { get; set; }
 
         [Required]
         [Display(Name = "Description:")]
@@ -34,6 +34,10 @@ namespace KnowIT_TransportIT_webapp.Models
         [Required]
         [Display(Name = "Category (Transport):")]
         public string? Category { get; set; }
+
+        [Required]
+        [Display(Name = "Week day:")]
+        public string? WeekDay { get; set; }
 
         [Display(Name = "Image file name (with .jpg/.png):")]
         public string? Image_path { get; set; }
