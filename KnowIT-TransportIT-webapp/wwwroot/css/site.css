@@ -57,6 +57,11 @@ body {
     margin-bottom: 60px;
 }
 
+#logout {
+    margin-top: 13px;
+    margin-left: 25px;
+}
+
 @media (max-width: 767px) {
     html, body {
         font-size: 20px;

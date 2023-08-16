@@ -7,14 +7,14 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" id="products" asp-area="AdminTickets" asp-controller="AdminTickets" asp-action="Index">ADMIN TICKETS</a>
+            <a class="nav-link text-dark" id="products" asp-area="AdminTickets" asp-controller="AdminTickets" asp-action="Index">ADMIN <br> TICKETS</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" id="orders" asp-area="AdminBillings" asp-controller="AdminBillings" asp-action="Index">ADMIN BILLINGS</a>
+            <a class="nav-link text-dark" id="orders" asp-area="AdminBillings" asp-controller="AdminBillings" asp-action="Index">ADMIN <br> BILLINGS</a>
         </li>
 
         <li class="nav-item">
-            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">LOGGED IN: @UserManager.GetUserName(User)</a>
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">LOGGED IN: <br>@UserManager.GetUserName(User)</a>
         </li>
         <li class="nav-item">
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "AdminBillings", new { area = "" })">
