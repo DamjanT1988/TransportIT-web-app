@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>MAIN LIST - ALL TICKETS/FARES</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -32,6 +32,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Week_day)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Image_path)
@@ -63,6 +66,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
+            <th>
+               @Html.DisplayFor(model => item.Week_day)
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.Image_path)
             </td>

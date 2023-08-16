@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KnowIT_TransportIT_webapp.Migrations.Tickets
 {
     [DbContext(typeof(TicketsContext))]
-    [Migration("20230816165106_InitialCreateTickets")]
+    [Migration("20230816231756_InitialCreateTickets")]
     partial class InitialCreateTickets
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,7 @@ namespace KnowIT_TransportIT_webapp.Migrations.Tickets
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.21");
 
-            modelBuilder.Entity("KnowIT_TransportIT_webapp.Models.TicketsClass", b =>
+            modelBuilder.Entity("KnowIT_TransportIT_webapp.Models.TicketsModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,11 +44,15 @@ namespace KnowIT_TransportIT_webapp.Migrations.Tickets
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Ticket_number")
+                    b.Property<int?>("Ticket_number")
+                        .IsRequired()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Trip_title")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Trip_title")
+                    b.Property<string>("WeekDay")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

@@ -37,7 +37,7 @@ namespace KnowIT_TransportIT_webapp.Models
 
         [Required]
         [Display(Name = "Week day:")]
-        public string? WeekDay { get; set; }
+        public string? Week_day { get; set; }
 
         [Display(Name = "Image file name (with .jpg/.png):")]
         public string? Image_path { get; set; }

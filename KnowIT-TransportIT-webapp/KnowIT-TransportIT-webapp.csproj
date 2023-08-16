@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations\Billing\" />
+    <Folder Include="Migrations\Tickets\" />
     <Folder Include="Migrations\User\" />
   </ItemGroup>
 
