@@ -27,26 +27,26 @@ namespace KnowIT_TransportIT_webapp.Migrations.Tickets
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Image_path")
+                    b.Property<string>("ImagePath")
                         .HasColumnType("TEXT");
 
                     b.Property<double?>("Price")
                         .IsRequired()
                         .HasColumnType("REAL");
 
-                    b.Property<bool?>("Ticket_available")
+                    b.Property<bool?>("TicketAvailable")
                         .IsRequired()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Ticket_description")
+                    b.Property<string>("TicketDescription")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Ticket_number")
+                    b.Property<int?>("TicketNumber")
                         .IsRequired()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Trip_title")
+                    b.Property<string>("TripTitle")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

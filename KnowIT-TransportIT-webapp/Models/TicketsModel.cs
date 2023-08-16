@@ -13,15 +13,15 @@ namespace KnowIT_TransportIT_webapp.Models
         //user input and object properties
         [Required]
         [Display(Name = "Title of trip:")]
-        public string? Trip_title { get; set; }
+        public string? TripTitle { get; set; }
 
         [Required]
         [Display(Name = "Unique ticket ID number:")]
-        public int? Ticket_number { get; set; }
+        public int? TicketNumber { get; set; }
 
         [Required]
         [Display(Name = "Description:")]
-        public string? Ticket_description { get; set; }
+        public string? TicketDescription { get; set; }
 
         [Required]
         [Display(Name = "Day price (SEK):")]
@@ -29,7 +29,7 @@ namespace KnowIT_TransportIT_webapp.Models
 
         [Required]
         [Display(Name = "Available:")]
-        public bool? Ticket_available { get; set; }
+        public bool? TicketAvailable { get; set; }
 
         [Required]
         [Display(Name = "Category (Transport):")]
@@ -37,18 +37,18 @@ namespace KnowIT_TransportIT_webapp.Models
 
         [Required]
         [Display(Name = "Week day:")]
-        public string? Week_day { get; set; }
+        public string? WeekDay { get; set; }
 
         [Display(Name = "Image file name (with .jpg/.png):")]
-        public string? Image_path { get; set; }
+        public string? ImagePath { get; set; }
 
         //not stored in DB, but shown in UI
         [NotMapped]
         [Display(Name = "Image file")]
-        public IFormFile? Image_file { get; set; }
+        public IFormFile? ImageFile { get; set; }
 
         //save data from transfer by API
         [NotMapped]
-        public byte[]? Image_data { get; set; }
+        public byte[]? ImageData { get; set; }
     }
 }
