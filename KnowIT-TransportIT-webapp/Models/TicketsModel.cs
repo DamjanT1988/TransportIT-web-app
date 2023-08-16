@@ -24,7 +24,7 @@ namespace KnowIT_TransportIT_webapp.Models
         public string? Ticket_description { get; set; }
 
         [Required]
-        [Display(Name = "Price (SEK):")]
+        [Display(Name = "Day price (SEK):")]
         public double? Price { get; set; }
 
         [Required]
