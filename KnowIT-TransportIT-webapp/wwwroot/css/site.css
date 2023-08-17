@@ -49,6 +49,7 @@ th {
     border-radius: 5px;
     text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
+    margin-right: 5px;
 }
 
     
@@ -59,11 +60,11 @@ th {
     }
 
 #tickets {
-    background-color: lightcoral;
+    background-color: lightseagreen;
 }
 
 #billings {
-    background-color: lightgoldenrodyellow; 
+    background-color: lightgreen; 
 }
 
 #passangers {
@@ -75,7 +76,7 @@ th {
 }
 
 #manage {
-    background-color: lightseagreen
+    background-color: lightslategrey;
 }
 
 #login {
