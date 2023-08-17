@@ -56,20 +56,37 @@ namespace KnowIT_TransportIT_webapp.Controllers
         }
 
         // POST: AdminBillings/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,CustomerSocNo,CustomerAdress,Status,InternalNote, StartDate, EndDate, StartTime, EndTime")] BillingModel billingModel)
+        public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,CustomerSocNo,CheckTransport,Status,InternalNote, StartDate, EndDate, StartTime, EndTime")] BillingModel billingModel)
         {
+
+            //check ticket cost is >200
+            // Check if the TicketCost is more than 200
+            if (billingModel.TicketCost > 200)
+            {
+                billingModel.TicketCost = 200;
+            }
+
+
+
+
+
+
+
+            //check model state, then save, return to index page
             if (ModelState.IsValid)
             {
                 _context.Add(billingModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            //return view
             return View(billingModel);
         }
+
+
 
         // GET: AdminBillings/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -88,11 +105,9 @@ namespace KnowIT_TransportIT_webapp.Controllers
         }
 
         // POST: AdminBillings/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,CustomerSocNo,CustomerAdress,Status,InternalNote, StartDate, EndDate, StartTime, EndTime")] BillingModel billingModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,CustomerSocNo,CheckTransport,Status,InternalNote, StartDate, EndDate, StartTime, EndTime")] BillingModel billingModel)
         {
             if (id != billingModel.Id)
             {

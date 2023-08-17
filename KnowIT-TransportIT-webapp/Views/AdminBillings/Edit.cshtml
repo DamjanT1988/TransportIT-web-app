@@ -43,9 +43,9 @@
                 <span asp-validation-for="CustomerSocNo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CustomerAdress" class="control-label"></label>
-                <input asp-for="CustomerAdress" class="form-control" />
-                <span asp-validation-for="CustomerAdress" class="text-danger"></span>
+                <label asp-for="CheckTransport" class="control-label"></label>
+                <input asp-for="CheckTransport" class="form-control" />
+                <span asp-validation-for="CheckTransport" class="text-danger"></span>
             </div>
             @{
                 var ticketAvailableOptions = new List<SelectListItem>
@@ -94,14 +94,14 @@
                 <input asp-for="EndTime" class="form-control" type="time" />
                 <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
-
+            <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
+<br />
 <div>
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>

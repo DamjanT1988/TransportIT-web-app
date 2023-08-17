@@ -43,11 +43,16 @@
                 <input asp-for="CustomerSocNo" class="form-control" />
                 <span asp-validation-for="CustomerSocNo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CustomerAdress" class="control-label"></label>
-                <textarea asp-for="CustomerAdress" class="form-control"></textarea>
-                <span asp-validation-for="CustomerAdress" class="text-danger"></span>
+
+             <div class="form-group">
+                <label asp-for="CheckTransport" class="control-label"></label>
+                <select asp-for="CheckTransport" class="form-control">
+                    <option value="">Not checked</option>
+                    <option value="True">Checked-in</option>
+                </select>
+                <span asp-validation-for="CheckTransport" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
                 <select asp-for="Status" class="form-control">

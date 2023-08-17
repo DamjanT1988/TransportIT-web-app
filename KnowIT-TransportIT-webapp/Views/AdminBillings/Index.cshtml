@@ -34,7 +34,7 @@
                 @Html.DisplayNameFor(model => model.CustomerSocNo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerAdress)
+                @Html.DisplayNameFor(model => model.CheckTransport)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
@@ -82,9 +82,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CustomerSocNo)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerAdress)
-            </td>
+
+                <td style="@((item.CheckTransport.HasValue && item.CheckTransport.Value) ? "background-color: blue;" : "background-color: gray;")">
+                    @(item.CheckTransport.HasValue ? (item.CheckTransport.Value ? "Check-in" : "Check-out") : "Not checked")
+                </td>
+
 
                 <td style="@((item.Status.HasValue && item.Status.Value) ? "background-color: green;" : "background-color: red;")">
                     @(item.Status.HasValue ? (item.Status.Value ? "Active" : "Inactive") : "N/A")
@@ -108,6 +110,7 @@
 
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
             </td>
         </tr>
 }
