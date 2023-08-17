@@ -1,0 +1,52 @@
+﻿@model IEnumerable<KnowIT_TransportIT_webapp.Models.FreeDayClass>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>MAIN LIST - ALL FREE DAYS/HOLIDAYS</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create new free day</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FreeDayReason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusFreeDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDateFreeDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDateFreeDay)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FreeDayReason)
+            </td>
+                <td style="@((item.StatusFreeDay.HasValue && item.StatusFreeDay.Value) ? "background-color: green;" : "background-color: red;")">
+                    @(item.StatusFreeDay.HasValue ? (item.StatusFreeDay.Value ? "Active" : "Inactive") : "N/A")
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDateFreeDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDateFreeDay)
+            </td>
+            <td>
+                    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

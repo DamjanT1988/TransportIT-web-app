@@ -6,12 +6,16 @@ html {
 .control-label {
     font-weight: 700;
     margin-bottom: 7.5px;
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 1.2em;
 }
 
 .btn-primary {
     background-color: navy;
+}
+
+.navbar-nav {
+    margin-top: 5px;
 }
 
 .form-control {
@@ -34,8 +38,51 @@ th {
 
 .navbar-brand {
     font: 900;
-    font-size: 3.2em;
+    font-size: 3.6em;
+    margin-right: 25px;
 }
+
+#tickets, #billings, #passangers, #freeday, #manage, #login, #register {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+    #tickets:hover, #billings:hover, #passangers:hover, #freeday:hover, #manage:hover, #login:hover, #register:hover {
+        text-decoration: none;
+        color: white;
+    }
+
+#tickets {
+    background-color: lightcoral;
+}
+
+#billings {
+    background-color: lightgoldenrodyellow; 
+}
+
+#passangers {
+    background-color: lightskyblue;
+}
+
+#freeday {
+    background-color: lightsalmon
+}
+
+#manage {
+    background-color: lightseagreen
+}
+
+#login {
+    background-color: #03a9f4; 
+}
+
+#register {
+    background-color: #8bc34a; 
+}
+
 
 
 select.form-control {

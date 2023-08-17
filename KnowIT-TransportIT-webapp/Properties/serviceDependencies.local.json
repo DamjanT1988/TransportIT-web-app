@@ -11,6 +11,10 @@
     "mssql3": {
       "type": "mssql.local",
       "connectionId": "ConnectionStrings:PassangerContext"
+    },
+    "mssql4": {
+      "type": "mssql.local",
+      "connectionId": "ConnectionStrings:FreeDayContext"
     }
   }
 }
