@@ -60,7 +60,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Order,Email,Telephone,CustomerName,CustomerSocNo,CustomerAdress,Status,InternalNote, StartDate, EndDate, StartTime, EndTime")] BillingModel billingModel)
+        public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,CustomerSocNo,CustomerAdress,Status,InternalNote, StartDate, EndDate, StartTime, EndTime")] BillingModel billingModel)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Order,Email,Telephone,CustomerName,CustomerSocNo,CustomerAdress,Status,InternalNote, StartDate, EndDate, StartTime, EndTime")] BillingModel billingModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,CustomerSocNo,CustomerAdress,Status,InternalNote, StartDate, EndDate, StartTime, EndTime")] BillingModel billingModel)
         {
             if (id != billingModel.Id)
             {

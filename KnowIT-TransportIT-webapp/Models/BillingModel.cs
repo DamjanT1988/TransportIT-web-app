@@ -16,6 +16,9 @@ namespace KnowIT_TransportIT_webapp.Models
         [Display(Name = "Billing information")]
         public string? Order { get; set; }
 
+        [Display(Name = "Total ticket cost")]
+        public double? TicketCost { get; set; }
+
         [Display(Name = "Customer email")]
         public string? Email { get; set; }
 

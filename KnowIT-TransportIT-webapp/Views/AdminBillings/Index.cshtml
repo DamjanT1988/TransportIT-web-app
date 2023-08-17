@@ -16,6 +16,9 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.TicketCost)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Order)
             </th>
             <th>
@@ -61,6 +64,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketCost)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Order)
             </td>
