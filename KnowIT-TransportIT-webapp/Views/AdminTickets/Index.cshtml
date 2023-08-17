@@ -62,7 +62,7 @@
             </td>
 
                 <td style="@((item.TicketAvailable.HasValue && item.TicketAvailable.Value) ? "background-color: green;" : "background-color: red;")">
-                        @Html.DisplayFor(modelItem => item.TicketAvailable)
+                    @(item.TicketAvailable.HasValue ? (item.TicketAvailable.Value ? "Selling" : "Inactive") : "N/A")
                 </td>
 
 
