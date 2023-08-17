@@ -23,19 +23,19 @@ namespace KnowIT_TransportIT_webapp.Models
         public string? Telephone { get; set; }
 
         [Display(Name = "Customer name")]
-        public string? Customer_name { get; set; }
+        public string? CustomerName { get; set; }
 
         [Display(Name = "Customer social number")]
-        public int? Customer_sol_no { get; set; }
+        public int? CustomerSocNo { get; set; }
         
         [Display(Name = "Customer adress")]
-        public string? Customer_adress { get; set; }
+        public string? CustomerAdress { get; set; }
                 
         [Display(Name = "Status of the trip")]
         public bool? Status { get; set; }
 
         [Display(Name = "Internal notes")]
-        public string? Internal_note { get; set; }
+        public string? InternalNote { get; set; }
 
         [Display(Name = "Start Date:")]
         [DataType(DataType.Date)]

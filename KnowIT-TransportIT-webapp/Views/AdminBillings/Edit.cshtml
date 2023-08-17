@@ -28,19 +28,19 @@
                 <span asp-validation-for="Telephone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Customer_name" class="control-label"></label>
-                <input asp-for="Customer_name" class="form-control" />
-                <span asp-validation-for="Customer_name" class="text-danger"></span>
+                <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Customer_sol_no" class="control-label"></label>
-                <input asp-for="Customer_sol_no" class="form-control" />
-                <span asp-validation-for="Customer_sol_no" class="text-danger"></span>
+                <label asp-for="CustomerSocNo" class="control-label"></label>
+                <input asp-for="CustomerSocNo" class="form-control" />
+                <span asp-validation-for="CustomerSocNo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Customer_adress" class="control-label"></label>
-                <input asp-for="Customer_adress" class="form-control" />
-                <span asp-validation-for="Customer_adress" class="text-danger"></span>
+                <label asp-for="CustomerAdress" class="control-label"></label>
+                <input asp-for="CustomerAdress" class="form-control" />
+                <span asp-validation-for="CustomerAdress" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
@@ -48,10 +48,31 @@
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Internal_note" class="control-label"></label>
-                <input asp-for="Internal_note" class="form-control" />
-                <span asp-validation-for="Internal_note" class="text-danger"></span>
+                <label asp-for="InternalNote" class="control-label"></label>
+                <input asp-for="InternalNote" class="form-control" />
+                <span asp-validation-for="InternalNote" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" type="date" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartTime" class="control-label"></label>
+                <input asp-for="StartTime" class="form-control" type="time" />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" type="date" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndTime" class="control-label"></label>
+                <input asp-for="EndTime" class="form-control" type="time" />
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

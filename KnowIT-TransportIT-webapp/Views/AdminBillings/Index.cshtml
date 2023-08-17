@@ -7,7 +7,7 @@
 <h1>MAIN LIST - SOLD TICKETS/FARES</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Add new fare</a>
+    <a asp-action="Create" class="btn btn-primary">Add new sold ticket</a>
 </p>
 <table class="table">
     <thead>
@@ -25,20 +25,33 @@
                 @Html.DisplayNameFor(model => model.Telephone)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer_name)
+                @Html.DisplayNameFor(model => model.CustomerName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer_sol_no)
+                @Html.DisplayNameFor(model => model.CustomerSocNo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer_adress)
+                @Html.DisplayNameFor(model => model.CustomerAdress)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Internal_note)
+                @Html.DisplayNameFor(model => model.InternalNote)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -58,20 +71,33 @@
                 @Html.DisplayFor(modelItem => item.Telephone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer_name)
+                @Html.DisplayFor(modelItem => item.CustomerName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer_sol_no)
+                @Html.DisplayFor(modelItem => item.CustomerSocNo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer_adress)
+                @Html.DisplayFor(modelItem => item.CustomerAdress)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Internal_note)
+                @Html.DisplayFor(modelItem => item.InternalNote)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTime)
+                </td>
+
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
