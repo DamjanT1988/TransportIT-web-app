@@ -7,7 +7,7 @@ namespace KnowIT_TransportIT_webapp.Models
     public class TicketsModel
     {
         //data fields
-        [Display(Name = "Object ID number:")]
+        [Display(Name = "Database ID number:")]
         public int Id { get; set; }
 
         //user input and object properties
@@ -16,7 +16,7 @@ namespace KnowIT_TransportIT_webapp.Models
         public string? TripTitle { get; set; }
 
         [Required]
-        [Display(Name = "Unique ticket ID number:")]
+        [Display(Name = "Ticket ID number (sorted):")]
         public int? TicketNumber { get; set; }
 
         [Required]
@@ -28,7 +28,7 @@ namespace KnowIT_TransportIT_webapp.Models
         public double? Price { get; set; }
 
         [Required]
-        [Display(Name = "Available:")]
+        [Display(Name = "Available now?:")]
         public bool? TicketAvailable { get; set; }
 
         [Required]

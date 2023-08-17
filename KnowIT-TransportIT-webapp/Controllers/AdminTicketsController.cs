@@ -60,7 +60,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Trip_title,Ticket_number,Ticket_description,Price,Ticket_available,Category,Week_day, Image_path")] TicketsModel ticketsModel)
+        public async Task<IActionResult> Create([Bind("Id,TripTitle,TicketNumber,TicketDescription,Price,TicketAvailable,Category,WeekDay, ImagePath")] TicketsModel ticketsModel)
         {
             if (ModelState.IsValid)
             {
@@ -92,12 +92,13 @@ namespace KnowIT_TransportIT_webapp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Trip_title,Ticket_number,Ticket_description,Price,Ticket_available,Category,Image_path")] TicketsModel ticketsModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TripTitle,TicketNumber,TicketDescription,Price,TicketAvailable,Category,WeekDay")] TicketsModel ticketsModel)
         {
+            /*
             if (id != ticketsModel.Id)
             {
                 return NotFound();
-            }
+            }*/
 
             if (ModelState.IsValid)
             {
