@@ -9,31 +9,32 @@
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
+            <th style="max-width:10px;">
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TripTitle)
             </th>
-            <th>
+            <th style="max-width:10px;">
                 @Html.DisplayNameFor(model => model.TicketNumber)
             </th>
-            <th>
+            <th style="width:40px;">
                 @Html.DisplayNameFor(model => model.TicketDescription)
             </th>
-            <th>
+            <th style="max-width:10px;">
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th>
+            <th style="width:20px;">
                 @Html.DisplayNameFor(model => model.TicketAvailable)
             </th>
-            <th>
+            <th style="max-width:15px;">
                 @Html.DisplayNameFor(model => model.Category)
             </th>
-            <th>
+            <th style="width:20px;">
                 @Html.DisplayNameFor(model => model.WeekDay)
             </th>
             
