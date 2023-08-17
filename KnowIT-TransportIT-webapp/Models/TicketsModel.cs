@@ -7,7 +7,7 @@ namespace KnowIT_TransportIT_webapp.Models
     public class TicketsModel
     {
         //data fields
-        [Display(Name = "Database ID number")]
+        [Display(Name = "Database ID no.")]
         public int Id { get; set; }
 
         //user input and object properties
@@ -16,7 +16,7 @@ namespace KnowIT_TransportIT_webapp.Models
         public string? TripTitle { get; set; }
 
         [Required]
-        [Display(Name = "Ticket ID number (sorted)")]
+        [Display(Name = "Ticket ID no. (sorted)")]
         public int? TicketNumber { get; set; }
 
         [Required]
