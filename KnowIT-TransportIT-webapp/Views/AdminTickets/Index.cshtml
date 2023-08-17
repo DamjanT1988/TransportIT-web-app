@@ -60,9 +60,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TicketAvailable)
-            </td>
+
+                <td style="@((item.TicketAvailable.HasValue && item.TicketAvailable.Value) ? "background-color: green;" : "background-color: red;")">
+                        @Html.DisplayFor(modelItem => item.TicketAvailable)
+                </td>
+
+
             <td>
                 @Html.DisplayFor(modelItem => item.Category)
             </td>

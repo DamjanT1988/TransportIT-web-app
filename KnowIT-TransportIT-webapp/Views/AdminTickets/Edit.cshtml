@@ -32,11 +32,30 @@
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
+            @{
+                var ticketAvailableOptions = new List<SelectListItem>
+            {
+            new SelectListItem { Text = "True", Value = "true" },
+            new SelectListItem { Text = "False", Value = "false" }
+            };
+
+                foreach (var option in ticketAvailableOptions)
+                {
+                    if (bool.Parse(option.Value) == Model.TicketAvailable)
+                    {
+                        option.Selected = true;
+                        break;
+                    }
+                }
+            }
+
             <div class="form-group">
                 <label asp-for="TicketAvailable" class="control-label"></label>
-                <input asp-for="TicketAvailable" class="form-control" />
+                @Html.DropDownListFor(model => model.TicketAvailable, ticketAvailableOptions, new { @class = "form-control" })
                 <span asp-validation-for="TicketAvailable" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
                 <input asp-for="Category" class="form-control" />
