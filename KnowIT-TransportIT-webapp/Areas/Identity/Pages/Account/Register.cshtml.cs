@@ -102,7 +102,7 @@ namespace KnowIT_TransportIT_webapp.Areas.Identity.Pages.Account
             public string SecKey { get; set; } = "KnowIT";
 
             [DataType(DataType.Password)]
-            [Display(Name = "Enter security key")]
+            [Display(Name = "Enter security key (it's 'KnowIT')")]
             [Compare("SecKey", ErrorMessage = "The key is not correct.")]
             public string Key { get; set; }
         }
