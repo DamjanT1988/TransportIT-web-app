@@ -7,10 +7,13 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" id="products" asp-area="AdminTickets" asp-controller="AdminTickets" asp-action="Index">ADMIN <br> TICKETS</a>
+            <a class="nav-link text-dark" id="products" asp-area="AdminTickets" asp-controller="AdminTickets" asp-action="Index">ADMIN <br> FARES</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" id="orders" asp-area="AdminBillings" asp-controller="AdminBillings" asp-action="Index">ADMIN <br> BILLINGS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" id="orders" asp-area="AdminPassanger" asp-controller="AdminPassanger" asp-action="Index">ADMIN <br> PASSANGER</a>
         </li>
 
         <li class="nav-item">

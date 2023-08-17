@@ -9,7 +9,7 @@ namespace KnowIT_TransportIT_webapp.Models
         //data fields
 
         //data fields
-        [Display(Name = "Billing ID number:")]
+        [Display(Name = "Billing ID no.")]
         public int Id { get; set; }
 
         //user input and object properties
@@ -22,14 +22,14 @@ namespace KnowIT_TransportIT_webapp.Models
         [Display(Name = "Customer email")]
         public string? Email { get; set; }
 
-        [Display(Name = "Customer telephone number")]
+        [Display(Name = "Customer telephone no.")]
         public string? Telephone { get; set; }
 
         [Display(Name = "Customer name")]
         public string? CustomerName { get; set; }
 
-        [Display(Name = "Customer social number")]
-        public int? CustomerSocNo { get; set; }
+        [Display(Name = "Passanger ID no.")]
+        public int? PassangerNo { get; set; }
         
         [Display(Name = "Check in/out")]
         public bool? CheckTransport { get; set; }

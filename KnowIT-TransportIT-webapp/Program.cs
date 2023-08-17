@@ -18,6 +18,9 @@ var connectionString = builder.Configuration.GetConnectionString("UserContext") 
 builder.Services.AddDbContext<UserContext>(options =>
     options.UseSqlite(connectionString));
 
+builder.Services.AddDbContext<PassangerContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("PassangerContext") ?? throw new InvalidOperationException("Connection string 'PassangerContext' not found.")));
+
 //add sign-in req
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<UserContext>();

@@ -23,6 +23,8 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Order)
         </dd>
+
+        @*
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
@@ -41,11 +43,19 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CustomerName)
         </dd>
+
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CustomerSocNo)
+            @Html.DisplayNameFor(model => model.InternalNote)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CustomerSocNo)
+            @Html.DisplayFor(model => model.InternalNote)
+        </dd>
+        *@
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PassangerNo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PassangerNo)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CheckTransport)
@@ -59,12 +69,7 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Status)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InternalNote)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InternalNote)
-        </dd>
+        
         
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.StartDate)

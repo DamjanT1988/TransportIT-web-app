@@ -23,6 +23,7 @@
                 <input asp-for="TicketCost" class="form-control" />
                 <span asp-validation-for="TicketCost" class="text-danger"></span>
             </div>
+            @*
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
@@ -38,10 +39,19 @@
                 <input asp-for="CustomerName" class="form-control" />
                 <span asp-validation-for="CustomerName" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
-                <label asp-for="CustomerSocNo" class="control-label"></label>
-                <input asp-for="CustomerSocNo" class="form-control" />
-                <span asp-validation-for="CustomerSocNo" class="text-danger"></span>
+            <label asp-for="InternalNote" class="control-label"></label>
+            <textarea asp-for="InternalNote" class="form-control"></textarea>
+            <span asp-validation-for="InternalNote" class="text-danger"></span>
+            </div>
+            *@
+
+            <div class="form-group">
+                <label asp-for="PassangerNo" class="control-label"></label>
+                <input asp-for="PassangerNo" class="form-control" />
+                <span asp-validation-for="PassangerNo" class="text-danger"></span>
             </div>
 
              <div class="form-group">
@@ -62,11 +72,6 @@
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="InternalNote" class="control-label"></label>
-                <textarea asp-for="InternalNote" class="form-control"></textarea>
-                <span asp-validation-for="InternalNote" class="text-danger"></span>
-            </div>
 
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>
