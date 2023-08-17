@@ -7,36 +7,36 @@ namespace KnowIT_TransportIT_webapp.Models
     public class TicketsModel
     {
         //data fields
-        [Display(Name = "Database ID number:")]
+        [Display(Name = "Database ID number")]
         public int Id { get; set; }
 
         //user input and object properties
         [Required]
-        [Display(Name = "Title of trip:")]
+        [Display(Name = "Title of trip")]
         public string? TripTitle { get; set; }
 
         [Required]
-        [Display(Name = "Ticket ID number (sorted):")]
+        [Display(Name = "Ticket ID number (sorted)")]
         public int? TicketNumber { get; set; }
 
         [Required]
-        [Display(Name = "Description:")]
+        [Display(Name = "Description")]
         public string? TicketDescription { get; set; }
 
         [Required]
-        [Display(Name = "Day price (SEK):")]
+        [Display(Name = "Day price (SEK)")]
         public double? Price { get; set; }
 
         [Required]
-        [Display(Name = "Available now?:")]
+        [Display(Name = "Available now?")]
         public bool? TicketAvailable { get; set; }
 
         [Required]
-        [Display(Name = "Category (Transport):")]
+        [Display(Name = "Category (Transport)")]
         public string? Category { get; set; }
 
         [Required]
-        [Display(Name = "Week day:")]
+        [Display(Name = "Week day")]
         public string? WeekDay { get; set; }
 
         [Display(Name = "Image file name (with .jpg/.png):")]
