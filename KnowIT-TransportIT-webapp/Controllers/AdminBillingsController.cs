@@ -55,28 +55,37 @@ namespace KnowIT_TransportIT_webapp.Controllers
             return View();
         }
 
-        // POST: AdminBillings/Create
+
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,PassangerNo,CheckTransport,Status,InternalNote, StartDate, EndDate, StartTime, EndTime,  PurchaseDate")] BillingModel billingModel)
         {
+            // Set PurchaseDate to the current date
+            billingModel.PurchaseDate = DateTime.Now;
 
-            //check ticket cost is >200
+            // Fetch all FreeDays
+            var freeDays = _context.Set<FreeDayClass>().ToList();
+
+            // Check if PurchaseDate falls within any FreeDay range
+            foreach (var freeDay in freeDays)
+            {
+                if (billingModel.PurchaseDate >= freeDay.StartDateFreeDay && billingModel.PurchaseDate <= freeDay.EndDateFreeDay)
+                {
+                    billingModel.TicketCost = 0; // Set ticket cost to 0
+                    break; // No need to check further if we found a match
+                }
+            }
+
             // Check if the TicketCost is more than 200
             if (billingModel.TicketCost > 200)
             {
                 billingModel.TicketCost = 200;
             }
 
-
-            // Set PurchaseDate to the current date
-            billingModel.PurchaseDate = DateTime.Now;
-
-
-
-
-
-            //check model state, then save, return to index page
+            // Check model state, then save, return to index page
             if (ModelState.IsValid)
             {
                 _context.Add(billingModel);
@@ -84,9 +93,11 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            //return view
+            // Return view
             return View(billingModel);
         }
+
+
 
 
 
