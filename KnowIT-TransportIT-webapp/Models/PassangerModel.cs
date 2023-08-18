@@ -19,6 +19,17 @@ namespace KnowIT_TransportIT_webapp.Models
         [Display(Name = "Passanger social no.")]
         public int? PassangerSocNo { get; set; }
 
+        [Required]
+        [Display(Name = "Passanger password")]
+        public string? PassangerPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Passanger email")]
+        public string? PassangerEmail { get; set; }
+        
+        [Display(Name = "Passanger tel. no.")]
+        public string? PassangerTel { get; set; }
+
         [Display(Name = "Account creation")]
         [DataType(DataType.Date)]
         public DateTime? CreationAccount { get; set; }

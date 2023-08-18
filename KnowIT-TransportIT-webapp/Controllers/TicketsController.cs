@@ -25,12 +25,19 @@ namespace KnowIT_TransportIT_webapp.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TicketsModel>>> GetTicketsClass()
         {
-          if (_context.TicketsClass == null)
-          {
-              return NotFound();
-          }
-            return await _context.TicketsClass.ToListAsync();
+            if (_context.TicketsClass == null)
+            {
+                return NotFound();
+            }
+
+            //return only active fares/tickets
+            var availableTickets = await _context.TicketsClass
+                                    .Where(ticket => ticket.TicketAvailable == true)
+                                    .ToListAsync();
+
+            return availableTickets;
         }
+
 
         // GET: api/Tickets/5
         [HttpGet("{id}")]

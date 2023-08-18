@@ -56,7 +56,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PassangerName,PassangerSocNo,CreationAccount")] PassangerModel passangerModel)
+        public async Task<IActionResult> Create([Bind("Id,PassangerName,PassangerSocNo,CreationAccount,PassangerPassword,PassangerEmail,PassangerTel")] PassangerModel passangerModel)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PassangerName,PassangerSocNo,CreationAccount")] PassangerModel passangerModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PassangerName,PassangerSocNo,CreationAccount,PassangerPassword,PassangerEmail,PassangerTel")] PassangerModel passangerModel)
         {
             if (id != passangerModel.Id)
             {
