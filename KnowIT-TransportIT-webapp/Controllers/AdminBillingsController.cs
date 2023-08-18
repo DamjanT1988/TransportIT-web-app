@@ -58,7 +58,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
         // POST: AdminBillings/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,PassangerNo,CheckTransport,Status,InternalNote, StartDate, EndDate, StartTime, EndTime")] BillingModel billingModel)
+        public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,PassangerNo,CheckTransport,Status,InternalNote, StartDate, EndDate, StartTime, EndTime,  PurchaseDate")] BillingModel billingModel)
         {
 
             //check ticket cost is >200
@@ -69,6 +69,8 @@ namespace KnowIT_TransportIT_webapp.Controllers
             }
 
 
+            // Set PurchaseDate to the current date
+            billingModel.PurchaseDate = DateTime.Now;
 
 
 
@@ -107,7 +109,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
         // POST: AdminBillings/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,PassangerNo,CheckTransport,Status,InternalNote, StartDate, EndDate, StartTime, EndTime")] BillingModel billingModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,PassangerNo,CheckTransport,Status,InternalNote, StartDate, EndDate, StartTime, EndTime, PurchaseDate")] BillingModel billingModel)
         {
             if (id != billingModel.Id)
             {

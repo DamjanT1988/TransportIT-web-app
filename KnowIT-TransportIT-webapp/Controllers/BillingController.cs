@@ -90,6 +90,11 @@ namespace KnowIT_TransportIT_webapp.Controllers
           {
               return Problem("Entity set 'BillingContext.BillingModel'  is null.");
           }
+
+            //set purchase date and ticket status
+            billingModel.PurchaseDate = DateTime.Now;
+            billingModel.Status = true;
+            
             _context.BillingModel.Add(billingModel);
             await _context.SaveChangesAsync();
 

@@ -124,8 +124,13 @@ body {
 }
 
 #logout {
-    margin-top: 13px;
-    margin-left: 25px;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+#refresh {
+    margin-top: 5px;
+    margin-left: 20px;
 }
 
 @media (max-width: 767px) {

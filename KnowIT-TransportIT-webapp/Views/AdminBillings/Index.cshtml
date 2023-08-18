@@ -47,6 +47,7 @@
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             
+            @*
             <th>
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
@@ -59,7 +60,10 @@
             <th>
                 @Html.DisplayNameFor(model => model.EndTime)
             </th>
-
+            *@
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -95,7 +99,7 @@
                     @Html.DisplayFor(modelItem => item.PassangerNo)
             </td>
 
-                <td style="@((item.CheckTransport.HasValue && item.CheckTransport.Value) ? "background-color: blue;" : "background-color: gray;")">
+                <td style="@((item.CheckTransport.HasValue && item.CheckTransport.Value) ? "background-color: yellow;" : "background-color: gray;")">
                     @(item.CheckTransport.HasValue ? (item.CheckTransport.Value ? "Check-in" : "Check-out") : "Not checked")
                 </td>
 
@@ -104,6 +108,7 @@
                     @(item.Status.HasValue ? (item.Status.Value ? "Active" : "Inactive") : "N/A")
                     </td>
             
+                @*
                 <td>
                     @Html.DisplayFor(modelItem => item.StartDate)
                 </td>
@@ -116,7 +121,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.EndTime)
                 </td>
+                *@
 
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseDate)
+                </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>

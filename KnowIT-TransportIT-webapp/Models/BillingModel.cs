@@ -58,5 +58,9 @@ namespace KnowIT_TransportIT_webapp.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
         public DateTime? EndTime { get; set; }
 
+        [Display(Name = "Purchase date")]
+        [DataType(DataType.Date)]
+        public DateTime? PurchaseDate { get; set; }
+
     }
 }

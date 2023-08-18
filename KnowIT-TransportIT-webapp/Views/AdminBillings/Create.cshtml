@@ -67,12 +67,12 @@
                 <label asp-for="Status" class="control-label"></label>
                 <select asp-for="Status" class="form-control">
                     <option value="True">Active</option>
-                    <option value="False">Finished</option>
+                    <option value="False">Inactive</option>
                 </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
 
-
+            @*
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>
                 <input asp-for="StartDate" type="date" class="form-control" />
@@ -96,6 +96,14 @@
                 <input asp-for="EndTime" type="time" class="form-control" />
                 <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
+            *@
+
+            <div class="form-group">
+                <label asp-for="PurchaseDate" class="control-label"></label>
+                <input asp-for="PurchaseDate" type="date" class="form-control" />
+                <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+            </div>
+
             <br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
