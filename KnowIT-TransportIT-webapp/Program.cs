@@ -31,7 +31,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 
 // Register the BillingService
-builder.Services.AddScoped<BillingService>();  // Registering the BillingService
+builder.Services.AddScoped<Service>();  // Registering the Service
 
 
 // Add services to the container.

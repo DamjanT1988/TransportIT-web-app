@@ -95,6 +95,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
             billingModel.PurchaseDate = DateTime.Now;
             billingModel.Status = true;
             
+
             _context.BillingModel.Add(billingModel);
             await _context.SaveChangesAsync();
 

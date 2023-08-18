@@ -13,9 +13,11 @@ namespace KnowIT_TransportIT_webapp.Models
         public int Id { get; set; }
 
         //user input and object properties
+        [Required]
         [Display(Name = "Ticket information")]
         public string? Order { get; set; }
 
+        [Required]
         [Display(Name = "Total ticket cost")]
         public double? TicketCost { get; set; }
 
@@ -28,9 +30,11 @@ namespace KnowIT_TransportIT_webapp.Models
         [Display(Name = "Customer name")]
         public string? CustomerName { get; set; }
 
+        [Required]
         [Display(Name = "Passanger ID no.")]
         public int? PassangerNo { get; set; }
-        
+
+        [Required]
         [Display(Name = "Check in/out")]
         public bool? CheckTransport { get; set; }
                 

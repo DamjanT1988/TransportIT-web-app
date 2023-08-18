@@ -17,12 +17,12 @@ namespace KnowIT_TransportIT_webapp.Controllers
     public class AdminBillingsController : Controller
     {
         private readonly BillingContext _context;
-        private readonly BillingService _billingService;
+        private readonly Service _service;
 
-        public AdminBillingsController(BillingContext context, BillingService billingService)
+        public AdminBillingsController(BillingContext context, Service service)
         {
             _context = context;
-            _billingService = billingService;
+            _service = service;
         }
 
         // GET: AdminBillings
@@ -75,7 +75,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
         //PART check holiday/freedays
 
             // Fetch all FreeDays using the BillingService
-            var freeDays = _billingService.GetFreeDays();
+            var freeDays = _service.GetFreeDays();
 
             // Check if PurchaseDate falls within any FreeDay range
             foreach (var freeDay in freeDays)
