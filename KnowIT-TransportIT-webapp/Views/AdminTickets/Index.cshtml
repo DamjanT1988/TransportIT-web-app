@@ -58,7 +58,14 @@
                 @Html.DisplayFor(modelItem => item.TicketDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @if (item.Price == 0)
+                {
+                    @:Free
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Price)
+                }
             </td>
 
                 <td style="@((item.TicketAvailable.HasValue && item.TicketAvailable.Value) ? "background-color: green;" : "background-color: red;")">
