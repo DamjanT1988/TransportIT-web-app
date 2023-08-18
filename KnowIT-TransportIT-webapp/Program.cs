@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using KnowIT_TransportIT_webapp.Data;
 using Microsoft.AspNetCore.Identity;
+using System.Configuration;
 
 
 //create builder
@@ -27,6 +28,10 @@ builder.Services.AddDbContext<FreeDayContext>(options =>
 //add sign-in req
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<UserContext>();
+
+
+// Register the BillingService
+builder.Services.AddScoped<BillingService>();  // Registering the BillingService
 
 
 // Add services to the container.

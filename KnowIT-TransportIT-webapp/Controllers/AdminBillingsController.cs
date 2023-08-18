@@ -17,10 +17,12 @@ namespace KnowIT_TransportIT_webapp.Controllers
     public class AdminBillingsController : Controller
     {
         private readonly BillingContext _context;
+        private readonly BillingService _billingService;
 
-        public AdminBillingsController(BillingContext context)
+        public AdminBillingsController(BillingContext context, BillingService billingService)
         {
             _context = context;
+            _billingService = billingService;
         }
 
         // GET: AdminBillings
@@ -64,20 +66,28 @@ namespace KnowIT_TransportIT_webapp.Controllers
         public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,PassangerNo,CheckTransport,Status,InternalNote, StartDate, EndDate, StartTime, EndTime,  PurchaseDate")] BillingModel billingModel)
         {
             // Set PurchaseDate to the current date
-            billingModel.PurchaseDate = DateTime.Now;
+            if (billingModel.PurchaseDate == null)
+            {
+                billingModel.PurchaseDate = DateTime.Now;
+            }
 
-            // Fetch all FreeDays
-            var freeDays = _context.Set<FreeDayClass>().ToList();
+
+        //PART check holiday/freedays
+
+            // Fetch all FreeDays using the BillingService
+            var freeDays = _billingService.GetFreeDays();
 
             // Check if PurchaseDate falls within any FreeDay range
             foreach (var freeDay in freeDays)
             {
-                if (billingModel.PurchaseDate >= freeDay.StartDateFreeDay && billingModel.PurchaseDate <= freeDay.EndDateFreeDay)
+                if (billingModel.PurchaseDate >= freeDay.StartDateFreeDay || billingModel.PurchaseDate <= freeDay.EndDateFreeDay)
                 {
                     billingModel.TicketCost = 0; // Set ticket cost to 0
                     break; // No need to check further if we found a match
                 }
             }
+
+        //PART check total amount for passanger
 
             // Check if the TicketCost is more than 200
             if (billingModel.TicketCost > 200)
@@ -96,6 +106,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
             // Return view
             return View(billingModel);
         }
+
 
 
 
