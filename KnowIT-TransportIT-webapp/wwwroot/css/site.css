@@ -142,21 +142,9 @@ body {
     margin-bottom: 60px;
 }
 
-#logout {
-    margin-top: 15px;
-    margin-left: 20px;
-}
-
-#refresh {
+#logout, #refresh, #darkModeToggle {
     margin-top: 6px;
-    margin-left: 15px;
-    height: 65px;
-    width: 80px;
-}
-
-#darkModeToggle {
-    margin-top: 6px;
-    margin-left: 5px;
+    margin-left: 10px;
     height: 65px;
     width: 80px;
 }
