@@ -56,15 +56,20 @@
 
             @{
                 var checkAvailableOptions = new List<SelectListItem>
-            {
-            new SelectListItem { Text = "Checked-in", Value = "true" },
-            new SelectListItem { Text = "Checked-out", Value = "false" },
-            new SelectListItem { Text = "Not boarded", Value = "" }
-            };
+    {
+        new SelectListItem { Text = "Checked-in", Value = "true" },
+        new SelectListItem { Text = "Checked-out", Value = "false" },
+        new SelectListItem { Text = "Not boarded", Value = null }
+    };
 
                 foreach (var option in checkAvailableOptions)
                 {
-                    if (bool.Parse(option.Value) == Model.CheckTransport)
+                    if (string.IsNullOrEmpty(option.Value) && !Model.CheckTransport.HasValue)
+                    {
+                        option.Selected = true;
+                        break;
+                    }
+                    else if (bool.TryParse(option.Value, out bool optionValue) && optionValue == Model.CheckTransport)
                     {
                         option.Selected = true;
                         break;
@@ -72,12 +77,11 @@
                 }
             }
 
-            <div class="form-group">
-                <label asp-for="CheckTransport" class="control-label"></label>
+<div class="form-group">
+    <label asp-for="CheckTransport" class="control-label"></label>
                 @Html.DropDownListFor(model => model.CheckTransport, checkAvailableOptions, new { @class = "form-control" })
-                <span asp-validation-for="CheckTransport" class="text-danger"></span>
-            </div>
-
+    <span asp-validation-for="CheckTransport" class="text-danger"></span>
+</div>
 
 
             @{
@@ -125,6 +129,8 @@
                 <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
             *@
+
+
             <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

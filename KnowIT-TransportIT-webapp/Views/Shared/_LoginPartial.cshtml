@@ -27,6 +27,10 @@
             <a href="javascript:location.reload()" id="refresh" class="nav-link text-dark btn btn-outline-primary btn-link">REFRESH<br /> PAGE</a>
         </li>
 
+                <li class="nav-item">
+            <button id="darkModeToggle" class="btn btn-outline-secondary">DARK MODE</button>
+        </li>
+
         <li class="nav-item">
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "AdminBillings", new { area = "" })">
                 <button id="logout" type="submit" class="nav-link btn btn-link text-dark btn-outline-danger">LOGOUT</button>

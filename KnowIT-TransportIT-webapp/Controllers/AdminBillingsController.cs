@@ -65,22 +65,23 @@ namespace KnowIT_TransportIT_webapp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,PassangerNo,CheckTransport,Status,InternalNote, StartDate, EndDate, StartTime, EndTime,  PurchaseDate")] BillingModel billingModel)
         {
-            // Set PurchaseDate to the current date
+            // Set PurchaseDate to the current date - date set in system, not client
             if (billingModel.PurchaseDate == null)
             {
                 billingModel.PurchaseDate = DateTime.Now;
             }
 
 
-        //PART check holiday/freedays
+            //PART check holiday/freedays
 
             // Fetch all FreeDays using the BillingService
-            var freeDays = _service.GetFreeDays();
+            var freeDays = _service.GetFreeDays() ?? new List<FreeDayClass>();
+
 
             // Check if PurchaseDate falls within any FreeDay range
             foreach (var freeDay in freeDays)
             {
-                if (billingModel.PurchaseDate >= freeDay.StartDateFreeDay || billingModel.PurchaseDate <= freeDay.EndDateFreeDay)
+                if (billingModel.PurchaseDate >= freeDay.StartDateFreeDay && billingModel.PurchaseDate <= freeDay.EndDateFreeDay)
                 {
                     billingModel.TicketCost = 0; // Set ticket cost to 0
                     break; // No need to check further if we found a match
@@ -94,6 +95,11 @@ namespace KnowIT_TransportIT_webapp.Controllers
             {
                 billingModel.TicketCost = 200;
             }
+
+
+
+
+
 
             // Check model state, then save, return to index page
             if (ModelState.IsValid)
@@ -202,6 +208,51 @@ namespace KnowIT_TransportIT_webapp.Controllers
         {
             return (_context.BillingModel?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+
+        //OWN METHODS
+        // Action for checking in the passenger
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CheckIn(int id)
+        {
+            var billing = await _context.BillingModel.FindAsync(id);
+
+            if (billing == null)
+            {
+                return NotFound();
+            }
+
+            billing.CheckTransport = true;
+            billing.Status = true;
+
+            _context.Update(billing);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // Action for checking out the passenger
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CheckOut(int id)
+        {
+            var billing = await _context.BillingModel.FindAsync(id);
+
+            if (billing == null)
+            {
+                return NotFound();
+            }
+
+            billing.CheckTransport = false;
+            billing.Status = false;
+
+            _context.Update(billing);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
 
     }
 }

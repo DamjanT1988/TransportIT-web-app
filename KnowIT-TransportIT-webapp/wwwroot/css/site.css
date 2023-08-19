@@ -1,3 +1,19 @@
+
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+    /* Dark Theme */
+    body.dark-mode {
+        background-color: #c1c1c2;
+    }
+
+/* You can also adjust other elements for dark mode if necessary, e.g. */
+.dark-mode .navbar, .dark-mode footer {
+    background-color: #444444;
+}
+
 html {
     font-size: 18px;
     font-family: 'Arial Narrow', Arial, sans-serif;
@@ -104,6 +120,9 @@ select.form-control {
 }
 
 
+
+
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -130,7 +149,12 @@ body {
 
 #refresh {
     margin-top: 5px;
-    margin-left: 20px;
+    margin-left: 15px;
+}
+
+#darkModeToggle {
+    margin-top: 6px;
+    margin-left: 5px;
 }
 
 @media (max-width: 767px) {

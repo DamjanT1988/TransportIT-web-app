@@ -64,6 +64,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.PurchaseDate)
             </th>
+            <th>
+                Check In/Out
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -73,9 +76,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TicketCost)
-                </td>
+<td>
+    @if(item.TicketCost == 0)
+    {
+        @:Free
+    }
+    else
+    {
+        @Html.DisplayFor(modelItem => item.TicketCost)
+    }
+</td>
             <td>
                 @Html.DisplayFor(modelItem => item.Order)
             </td>
@@ -99,9 +109,14 @@
                     @Html.DisplayFor(modelItem => item.PassangerNo)
             </td>
 
-                <td style="@((item.CheckTransport.HasValue && item.CheckTransport.Value) ? "background-color: yellow;" : "background-color: gray;")">
-                    @(item.CheckTransport.HasValue ? (item.CheckTransport.Value ? "Check-in" : "Check-out") : "Not boarded")
-                </td>
+               <td style="@(
+                item.CheckTransport.HasValue 
+                ? (item.CheckTransport.Value ? "background-color: yellow;" : "background-color: lightgreen;") 
+                : "background-color: gray;"
+             )">
+    @(item.CheckTransport.HasValue ? (item.CheckTransport.Value ? "Check-in" : "Check-out") : "Not boarded")
+</td>
+
 
 
                 <td style="@((item.Status.HasValue && item.Status.Value) ? "background-color: green;" : "background-color: red;")">
@@ -125,6 +140,19 @@
 
                 <td>
                     @Html.DisplayFor(modelItem => item.PurchaseDate)
+                </td>
+                <td>
+                    <!-- Check In Button -->
+                    <form asp-action="CheckIn" method="post" style="display:inline;">
+                        <input type="hidden" name="Id" value="@item.Id" />
+                        <button type="submit" class="btn btn-success" @(item.CheckTransport.HasValue && item.CheckTransport.Value ? "disabled" : "")>Check In</button>
+                    </form>
+
+                    <!-- Check Out Button -->
+                    <form asp-action="CheckOut" method="post" style="display:inline;">
+                        <input type="hidden" name="Id" value="@item.Id" />
+                        <button type="submit" class="btn btn-warning" @(item.CheckTransport.HasValue && !item.CheckTransport.Value ? "disabled" : "")>Check Out</button>
+                    </form>
                 </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
