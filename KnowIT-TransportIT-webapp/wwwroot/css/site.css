@@ -10,8 +10,8 @@ body {
     }
 
 /* You can also adjust other elements for dark mode if necessary, e.g. */
-.dark-mode .navbar, .dark-mode footer {
-    background-color: #444444;
+footer {
+    background-color: #FFFFFF;
 }
 
 html {
@@ -148,13 +148,17 @@ body {
 }
 
 #refresh {
-    margin-top: 5px;
+    margin-top: 6px;
     margin-left: 15px;
+    height: 65px;
+    width: 80px;
 }
 
 #darkModeToggle {
     margin-top: 6px;
     margin-left: 5px;
+    height: 65px;
+    width: 80px;
 }
 
 @media (max-width: 767px) {
