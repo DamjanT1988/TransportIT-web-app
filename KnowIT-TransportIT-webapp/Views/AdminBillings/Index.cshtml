@@ -4,12 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
+
 <h1>ADMIN BILLINGS - SOLD TICKETS/FARES</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Add new sold ticket</a>
 </p>
-<table class="table">
+<table class="table" id="sortableTable">
     <thead>
         <tr>
             <th>
@@ -162,3 +163,4 @@
 }
     </tbody>
 </table>
+
