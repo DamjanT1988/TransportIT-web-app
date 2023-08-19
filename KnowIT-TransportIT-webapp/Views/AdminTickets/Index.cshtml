@@ -13,28 +13,28 @@
 <table class="table" id="sortableTable">
     <thead>
         <tr>
-            <th style="max-width:10px;">
+            <th>
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th style="max-width:40px;">
+            <th>
                 @Html.DisplayNameFor(model => model.TripTitle)
             </th>
-            <th style="width:10px;">
+            <th>
                 @Html.DisplayNameFor(model => model.TicketNumber)
             </th>
-            <th style="max-width:40px;">
+            <th>
                 @Html.DisplayNameFor(model => model.TicketDescription)
             </th>
-            <th style="width:10px;">
+            <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th style="width:20px;">
+            <th>
                 @Html.DisplayNameFor(model => model.TicketAvailable)
             </th>
-            <th style="max-width:15px;">
+            <th>
                 @Html.DisplayNameFor(model => model.Category)
             </th>
-            <th style="width:20px;">
+            <th>
                 @Html.DisplayNameFor(model => model.WeekDay)
             </th>
             
@@ -42,19 +42,19 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.OrderBy(t => t.TicketNumber))
+        @foreach (var item in Model)
         {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
-            <td>
+            <td class="truncate" title="@item.TripTitle">
                 @Html.DisplayFor(modelItem => item.TripTitle)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TicketNumber)
             </td>
-            <td>
+            <td class="truncate" title="@item.TicketDescription">
                 @Html.DisplayFor(modelItem => item.TicketDescription)
             </td>
             <td>
@@ -73,7 +73,7 @@
                 </td>
 
 
-            <td>
+            <td style="width: 10px;">
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
             <th>

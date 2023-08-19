@@ -42,7 +42,8 @@ html {
 
 .btn {
     font-weight: 700;
-    font-size: 0.85em;
+    font-size: 1em;
+    padding: 3px;
 }
 
 .productImages {
@@ -151,6 +152,14 @@ body {
     height: 65px;
     width: 80px;
 }
+
+.truncate {
+    max-width: 200px; /* or whatever width you desire */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 
 @media (max-width: 767px) {
     html, body {

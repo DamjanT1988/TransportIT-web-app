@@ -23,6 +23,6 @@
 $(document).ready(function () {
     $('#sortableTable').DataTable({
         "pageLength": 13,
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+        "lengthMenu": [[10, 20, 30, 50, 100, -1], [10, 20, 30, 50, 100, "All"]]
     });
 });
