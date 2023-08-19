@@ -34,7 +34,6 @@ namespace KnowIT_TransportIT_webapp.Models
         [Display(Name = "Passanger ID no.")]
         public int? PassangerNo { get; set; }
 
-        [Required]
         [Display(Name = "Check in/out")]
         public bool? CheckTransport { get; set; }
                 

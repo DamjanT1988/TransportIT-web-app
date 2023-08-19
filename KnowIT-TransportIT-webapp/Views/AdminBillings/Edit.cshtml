@@ -54,16 +54,37 @@
                 <span asp-validation-for="PassangerNo" class="text-danger"></span>
             </div>
 
+            @{
+                var checkAvailableOptions = new List<SelectListItem>
+            {
+            new SelectListItem { Text = "Checked-in", Value = "true" },
+            new SelectListItem { Text = "Checked-out", Value = "false" },
+            new SelectListItem { Text = "Not boarded", Value = "" }
+            };
+
+                foreach (var option in checkAvailableOptions)
+                {
+                    if (bool.Parse(option.Value) == Model.CheckTransport)
+                    {
+                        option.Selected = true;
+                        break;
+                    }
+                }
+            }
+
             <div class="form-group">
                 <label asp-for="CheckTransport" class="control-label"></label>
-                <input asp-for="CheckTransport" class="form-control" />
+                @Html.DropDownListFor(model => model.CheckTransport, checkAvailableOptions, new { @class = "form-control" })
                 <span asp-validation-for="CheckTransport" class="text-danger"></span>
             </div>
+
+
+
             @{
                 var ticketAvailableOptions = new List<SelectListItem>
             {
-            new SelectListItem { Text = "True", Value = "true" },
-            new SelectListItem { Text = "False", Value = "false" }
+            new SelectListItem { Text = "Active", Value = "true" },
+            new SelectListItem { Text = "Inactive", Value = "false" }
             };
 
                 foreach (var option in ticketAvailableOptions)
