@@ -1,19 +1,24 @@
 ﻿@model IEnumerable<KnowIT_TransportIT_webapp.Models.BillingModel>
 
 @{
+    // Set the title of the page view
     ViewData["Title"] = "Index";
 }
 
-
+<!-- Header for the admin billings page -->
 <h1>ADMIN BILLINGS - SOLD TICKETS/FARES</h1>
 
+<!-- Button to navigate to the Create page -->
 <p>
     <a asp-action="Create" class="btn btn-primary">Add new sold ticket</a>
 </p>
+
+<!-- Main table to display ticket/fare data -->
 <table class="table" id="sortableTable">
     <thead>
         <tr>
-            <th style ="width: 10px;">
+            <!-- Define table column headers -->
+            <th style="width: 10px;">
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th style="width: 10px;">
@@ -22,22 +27,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Order)
             </th>
-
-            @*
-            <th>
-            @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.Telephone)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.CustomerName)
-            </th>
-
-            <th>
-            @Html.DisplayNameFor(model => model.InternalNote)
-            </th>
-            *@
             <th style="width: 10px;">
                 @Html.DisplayNameFor(model => model.PassangerNo)
             </th>
@@ -47,15 +36,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
-
-            @*
-            @Html.DisplayNameFor(model => model.StartTime)
-            </th>
-            <th>
-            @Html.DisplayNameFor(model => model.EndTime)
-            </th>
-            *@
-
             <th>
                 Check In/Out
             </th>
@@ -69,17 +49,19 @@
                 @Html.DisplayNameFor(model => model.EndDate)
             </th>
             <th>
-
-            <th></th>
+            </th>
         </tr>
     </thead>
     <tbody>
+        <!-- Iterate through each ticket/fare item and display in a table row -->
         @foreach (var item in Model)
         {
             <tr>
+                <!-- Display ticket/fare ID -->
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
+                <!-- Display ticket cost, or 'Free' if cost is zero -->
                 <td>
                     @if (item.TicketCost == 0)
                     {
@@ -90,29 +72,15 @@
                         @Html.DisplayFor(modelItem => item.TicketCost)
                     }
                 </td>
+                <!-- Display order details with a tooltip for overflow content -->
                 <td class="truncate" title="@item.Order">
                     @Html.DisplayFor(modelItem => item.Order)
                 </td>
-
-                @*
-            <td>
-            @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-            @Html.DisplayFor(modelItem => item.Telephone)
-            </td>
-            <td>
-            @Html.DisplayFor(modelItem => item.CustomerName)
-            </td>
-
-            <td>
-            @Html.DisplayFor(modelItem => item.InternalNote)
-            </td>
-            *@
+                <!-- Display passenger number -->
                 <td>
                     @Html.DisplayFor(modelItem => item.PassangerNo)
                 </td>
-
+                <!-- Display check-in status with color-coded background -->
                 <td style="@(
                 item.CheckTransport.HasValue
                 ? (item.CheckTransport.Value ? "background-color: yellow;" : "background-color: lightgreen;")
@@ -120,45 +88,36 @@
              )">
                     @(item.CheckTransport.HasValue ? (item.CheckTransport.Value ? "Check-in" : "Check-out") : "Not boarded")
                 </td>
-
-
-
+                <!-- Display status (active/inactive) with color-coded background -->
                 <td style="@((item.Status.HasValue && item.Status.Value) ? "background-color: green;" : "background-color: red;")">
                     @(item.Status.HasValue ? (item.Status.Value ? "Active" : "Inactive") : "N/A")
                 </td>
-
-             
-                @*
-            <td>
-            @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-
-            <td>
-            @Html.DisplayFor(modelItem => item.EndTime)
-            </td>
-            *@
+                <!-- Provide check-in and check-out buttons -->
                 <td>
-                    <!-- Check In Button -->
+                    <!-- Check In Button form -->
                     <form asp-action="CheckIn" method="post" style="display:inline;">
                         <input type="hidden" name="Id" value="@item.Id" />
                         <button type="submit" class="btn btn-warning" @(item.CheckTransport.HasValue && item.CheckTransport.Value ? "disabled" : "")>Chk-In</button>
                     </form>
-
-                    <!-- Check Out Button -->
+                    <!-- Check Out Button form -->
                     <form asp-action="CheckOut" method="post" style="display:inline;">
                         <input type="hidden" name="Id" value="@item.Id" />
                         <button type="submit" class="btn btn-secondary" @(item.CheckTransport.HasValue && !item.CheckTransport.Value ? "disabled" : "")>Chk-Out</button>
                     </form>
                 </td>
+                <!-- Display purchase date -->
                 <td>
                     @Html.DisplayFor(modelItem => item.PurchaseDate)
                 </td>
+                <!-- Display start date -->
                 <td>
                     @Html.DisplayFor(modelItem => item.StartDate)
                 </td>
+                <!-- Display end date -->
                 <td>
                     @Html.DisplayFor(modelItem => item.EndDate)
                 </td>
+                <!-- Button to navigate to the edit page for the ticket/fare -->
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
                 </td>
@@ -166,4 +125,3 @@
         }
     </tbody>
 </table>
-

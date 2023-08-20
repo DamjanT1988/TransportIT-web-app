@@ -1,96 +1,55 @@
 ﻿@model KnowIT_TransportIT_webapp.Models.BillingModel
 
 @{
+    // Set the page title
     ViewData["Title"] = "Edit";
 }
 
 <h1>EDIT THE TICKET</h1>
 
 <hr />
+
 <div class="row">
     <div class="col-md-4">
+
+        <!-- Start of the Edit form -->
         <form asp-action="Edit">
+            <!-- Display model validation errors -->
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Hidden input to store the ticket ID -->
             <input type="hidden" asp-for="Id" />
+
+            <!-- Input field for Order -->
             <div class="form-group">
                 <label asp-for="Order" class="control-label"></label>
                 <input asp-for="Order" class="form-control" />
                 <span asp-validation-for="Order" class="text-danger"></span>
             </div>
+
+            <!-- Input field for Ticket Cost -->
             <div class="form-group">
                 <label asp-for="TicketCost" class="control-label"></label>
                 <input asp-for="TicketCost" class="form-control" />
                 <span asp-validation-for="TicketCost" class="text-danger"></span>
             </div>
 
-            @*
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telephone" class="control-label"></label>
-                <input asp-for="Telephone" class="form-control" />
-                <span asp-validation-for="Telephone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CustomerName" class="control-label"></label>
-                <input asp-for="CustomerName" class="form-control" />
-                <span asp-validation-for="CustomerName" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-            <label asp-for="InternalNote" class="control-label"></label>
-            <input asp-for="InternalNote" class="form-control" />
-            <span asp-validation-for="InternalNote" class="text-danger"></span>
-            </div>
-
-            *@
-
+            <!-- Input field for Passenger Number -->
             <div class="form-group">
                 <label asp-for="PassangerNo" class="control-label"></label>
                 <input asp-for="PassangerNo" class="form-control" />
                 <span asp-validation-for="PassangerNo" class="text-danger"></span>
             </div>
 
-            @{
-                var checkAvailableOptions = new List<SelectListItem>
-    {
-        new SelectListItem { Text = "Checked-in", Value = "true" },
-        new SelectListItem { Text = "Checked-out", Value = "false" },
-        new SelectListItem { Text = "Not boarded", Value = null }
-    };
-
-                foreach (var option in checkAvailableOptions)
-                {
-                    if (string.IsNullOrEmpty(option.Value) && !Model.CheckTransport.HasValue)
-                    {
-                        option.Selected = true;
-                        break;
-                    }
-                    else if (bool.TryParse(option.Value, out bool optionValue) && optionValue == Model.CheckTransport)
-                    {
-                        option.Selected = true;
-                        break;
-                    }
-                }
-            }
-
-<div class="form-group">
-    <label asp-for="CheckTransport" class="control-label"></label>
-                @Html.DropDownListFor(model => model.CheckTransport, checkAvailableOptions, new { @class = "form-control" })
-    <span asp-validation-for="CheckTransport" class="text-danger"></span>
-</div>
-
-
+            <!-- Preparing options for the Status dropdown -->
             @{
                 var ticketAvailableOptions = new List<SelectListItem>
-            {
-            new SelectListItem { Text = "Active", Value = "true" },
-            new SelectListItem { Text = "Inactive", Value = "false" }
-            };
+                {
+                    new SelectListItem { Text = "Active", Value = "true" },
+                    new SelectListItem { Text = "Inactive", Value = "false" }
+                };
 
+                // Mark the appropriate option as selected based on the model's Status value
                 foreach (var option in ticketAvailableOptions)
                 {
                     if (bool.Parse(option.Value) == Model.Status)
@@ -101,48 +60,54 @@
                 }
             }
 
+            <!-- Dropdown for Ticket Status -->
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
                 @Html.DropDownListFor(model => model.Status, ticketAvailableOptions, new { @class = "form-control" })
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
 
+            <!-- Input field for Purchase Date with default to today if no input -->
+            <div class="form-group">
+                <label asp-for="PurchaseDate" class="control-label"></label> (No input = today)
+                <input asp-for="PurchaseDate" type="date" class="form-control" />
+                <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+            </div>
+
+            <!-- Input field for Start Date -->
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>
                 <input asp-for="StartDate" class="form-control" type="date" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
+
+            <!-- Input field for End Date -->
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label"></label>
                 <input asp-for="EndDate" class="form-control" type="date" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
-            @*
-           <div class="form-group">
-                <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" class="form-control" type="time" />
-                <span asp-validation-for="StartTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndTime" class="control-label"></label>
-                <input asp-for="EndTime" class="form-control" type="time" />
-                <span asp-validation-for="EndTime" class="text-danger"></span>
-            </div>
-            *@
 
-
+            <!-- Save button -->
             <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
+        <!-- End of the Edit form -->
     </div>
 </div>
+
 <br />
+
+<!-- Navigation link to go back to the list of tickets -->
 <div>
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
 
+<!-- Load validation scripts -->
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

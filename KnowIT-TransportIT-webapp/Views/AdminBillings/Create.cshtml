@@ -1,60 +1,47 @@
 ﻿@model KnowIT_TransportIT_webapp.Models.BillingModel
 
 @{
+    // Set the page title for the creation view
     ViewData["Title"] = "Create";
 }
 
 <h1>CREATE A NEW BILLING</h1>
-
 <h4>Fill the details of the fare below</h4>
+
 <hr />
+
 <div class="row">
     <div class="col-md-4">
+
+        <!-- Start of the Create form -->
         <form asp-action="Create">
+
+            <!-- Display model validation errors -->
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <!-- Textarea for Order details -->
             <div class="form-group">
                 <label asp-for="Order" class="control-label"></label>
                 <textarea asp-for="Order" class="form-control"></textarea>
                 <span asp-validation-for="Order" class="text-danger"></span>
             </div>
+
+            <!-- Input field for Ticket Cost -->
             <div class="form-group">
                 <label asp-for="TicketCost" class="control-label"></label>
                 <input asp-for="TicketCost" class="form-control" />
                 <span asp-validation-for="TicketCost" class="text-danger"></span>
             </div>
-            @*
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telephone" class="control-label"></label>
-                <input asp-for="Telephone" class="form-control" />
-                <span asp-validation-for="Telephone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CustomerName" class="control-label"></label>
-                <input asp-for="CustomerName" class="form-control" />
-                <span asp-validation-for="CustomerName" class="text-danger"></span>
-            </div>
 
-
-            <div class="form-group">
-            <label asp-for="InternalNote" class="control-label"></label>
-            <textarea asp-for="InternalNote" class="form-control"></textarea>
-            <span asp-validation-for="InternalNote" class="text-danger"></span>
-            </div>
-            *@
-
+            <!-- Input field for Passenger Number -->
             <div class="form-group">
                 <label asp-for="PassangerNo" class="control-label"></label>
                 <input asp-for="PassangerNo" class="form-control" />
                 <span asp-validation-for="PassangerNo" class="text-danger"></span>
             </div>
 
-             <div class="form-group">
+            <!-- Dropdown for Check-in Status -->
+            <div class="form-group">
                 <label asp-for="CheckTransport" class="control-label"></label>
                 <select asp-for="CheckTransport" class="form-control">
                     <option value="">Not boarded</option>
@@ -63,6 +50,7 @@
                 <span asp-validation-for="CheckTransport" class="text-danger"></span>
             </div>
 
+            <!-- Dropdown for Ticket Status -->
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
                 <select asp-for="Status" class="form-control">
@@ -72,33 +60,21 @@
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
 
+            <!-- Input field for Start Date -->
             <div class="form-group">
                 <label asp-for="StartDate" class="control-label"></label>
                 <input asp-for="StartDate" type="date" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
 
+            <!-- Input field for End Date -->
             <div class="form-group">
                 <label asp-for="EndDate" class="control-label"></label>
                 <input asp-for="EndDate" type="date" class="form-control" />
                 <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
 
-
-
-            @*
-            <div class="form-group">
-                <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" type="time" class="form-control" />
-                <span asp-validation-for="StartTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndTime" class="control-label"></label>
-                <input asp-for="EndTime" type="time" class="form-control" />
-                <span asp-validation-for="EndTime" class="text-danger"></span>
-            </div>
-            *@
-
+            <!-- Input field for Purchase Date with default to today if no input -->
             <div class="form-group">
                 <label asp-for="PurchaseDate" class="control-label"></label> (No input = today)
                 <input asp-for="PurchaseDate" type="date" class="form-control" />
@@ -106,17 +82,24 @@
             </div>
 
             <br />
+
+            <!-- Create button to submit the form -->
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+        <!-- End of the Create form -->
     </div>
 </div>
+
 <br />
+
+<!-- Navigation link to go back to the list of billings -->
 <div>
     <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
 
+<!-- Load validation scripts -->
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
