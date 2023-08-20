@@ -30,7 +30,7 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+                <td class="truncate" title="@item.FreeDayReason">
                 @Html.DisplayFor(modelItem => item.FreeDayReason)
             </td>
                 <td style="@((item.StatusFreeDay.HasValue && item.StatusFreeDay.Value) ? "background-color: green;" : "background-color: red;")">

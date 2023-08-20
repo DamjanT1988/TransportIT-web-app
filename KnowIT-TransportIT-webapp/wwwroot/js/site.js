@@ -22,7 +22,7 @@
 
 $(document).ready(function () {
     $('#sortableTable').DataTable({
-        "pageLength": 13,
+        "pageLength": 11,
         "lengthMenu": [[10, 20, 30, 50, 100, -1], [10, 20, 30, 50, 100, "All"]]
     });
 });
