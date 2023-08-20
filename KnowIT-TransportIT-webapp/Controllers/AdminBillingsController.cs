@@ -58,48 +58,41 @@ namespace KnowIT_TransportIT_webapp.Controllers
         }
 
 
-
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,PassangerNo,CheckTransport,Status,InternalNote, StartDate, EndDate, StartTime, EndTime,  PurchaseDate")] BillingModel billingModel)
         {
-            // Set PurchaseDate to the current date - date set in system, not client
+            // Default PurchaseDate to the current system date if not set.
             if (billingModel.PurchaseDate == null)
             {
                 billingModel.PurchaseDate = DateTime.Now;
             }
 
-
-            //PART check holiday/freedays
-
-            // Fetch all FreeDays using the BillingService
+            // Retrieve all FreeDays from the service.
             var freeDays = _service.GetFreeDays() ?? new List<FreeDayClass>();
 
-
-            // Check if PurchaseDate falls within any FreeDay range
+            // Determine if the PurchaseDate is within a FreeDay range.
             foreach (var freeDay in freeDays)
             {
                 if (billingModel.PurchaseDate >= freeDay.StartDateFreeDay && billingModel.PurchaseDate <= freeDay.EndDateFreeDay)
                 {
-                    billingModel.TicketCost = 0; // Set ticket cost to 0
+                    billingModel.TicketCost = 0;
 
-                    // Add information to the ticket indicating it's free
+                    // Mark the ticket as free with the respective date.
                     billingModel.Order = $"FREE ON DAY {billingModel.PurchaseDate.Value.ToShortDateString()}";
 
-                    break; // No need to check further if we found a match
+                    break; // Terminate the loop if a matching FreeDay is found.
                 }
             }
 
-            // Check if the TicketCost is more than 200
+            // Cap the TicketCost at 200.
             if (billingModel.TicketCost > 200)
             {
                 billingModel.TicketCost = 200;
                 billingModel.Order = $"FREE REST OF DAY {billingModel.PurchaseDate.Value.ToShortDateString()}";
             }
 
-            // Overlapping days scenario
+            // Handle fares that overlap two days.
             if (billingModel.StartDate != billingModel.EndDate)
             {
                 var costDay1 = _context.BillingModel
@@ -110,34 +103,22 @@ namespace KnowIT_TransportIT_webapp.Controllers
                                        .Where(b => b.PassangerNo == billingModel.PassangerNo && b.PurchaseDate == billingModel.EndDate)
                                        .Sum(b => b.TicketCost);
 
-                if (costDay2 > costDay1)
-                {
-                    billingModel.PurchaseDate = billingModel.EndDate;
-                }
-                else
-                {
-                    billingModel.PurchaseDate = billingModel.StartDate;
-                }
+                // Determine the date with the higher cost.
+                billingModel.PurchaseDate = (costDay2 > costDay1) ? billingModel.EndDate : billingModel.StartDate;
             }
 
-            //PART check total amount for passanger
-            // First, fetch the total amount already spent by the passenger on the given day
+            // Calculate the total amount spent by the passenger for the day.
             var totalSpentToday = _context.BillingModel
                                           .Where(b => b.PassangerNo == billingModel.PassangerNo && b.PurchaseDate == billingModel.PurchaseDate)
                                           .Sum(b => b.TicketCost);
 
-            // If the totalSpentToday and the current ticket cost exceeds 200, adjust the current ticket cost
+            // Adjust the TicketCost if the combined total exceeds 200.
             if (totalSpentToday + billingModel.TicketCost > 200)
             {
                 billingModel.TicketCost = 200 - totalSpentToday;
             }
 
-
-
-
-
-
-            // Check model state, then save, return to index page
+            // Validate model state, save changes, and redirect to the index page.
             if (ModelState.IsValid)
             {
                 _context.Add(billingModel);
@@ -145,14 +126,9 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // Return view
+            // Return the current view if the model is invalid.
             return View(billingModel);
         }
-
-
-
-
-
 
         // GET: AdminBillings/Edit/5
         public async Task<IActionResult> Edit(int? id)
