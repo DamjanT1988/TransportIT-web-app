@@ -13,10 +13,10 @@
 <table class="table" id="sortableTable">
     <thead>
         <tr>
-            <th>
+            <th style ="width: 10px;">
                 @Html.DisplayNameFor(model => model.Id)
             </th>
-            <th>
+            <th style="width: 10px;">
                 @Html.DisplayNameFor(model => model.TicketCost)
             </th>
             <th>
@@ -25,20 +25,20 @@
 
             @*
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Telephone)
+            @Html.DisplayNameFor(model => model.Telephone)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerName)
+            @Html.DisplayNameFor(model => model.CustomerName)
             </th>
 
             <th>
             @Html.DisplayNameFor(model => model.InternalNote)
             </th>
             *@
-            <th>
+            <th style="width: 10px;">
                 @Html.DisplayNameFor(model => model.PassangerNo)
             </th>
             <th>
@@ -47,120 +47,123 @@
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
-            
+
             @*
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayNameFor(model => model.StartTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartTime)
+            @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+            *@
+
+            <th>
+                Check In/Out
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EndDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndTime)
-            </th>
-            *@
-            <th>
-                @Html.DisplayNameFor(model => model.PurchaseDate)
-            </th>
-            <th>
-                Check In/Out
-            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-<td>
-    @if(item.TicketCost == 0)
-    {
-        @:Free
-    }
-    else
-    {
-        @Html.DisplayFor(modelItem => item.TicketCost)
-    }
-</td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @if (item.TicketCost == 0)
+                    {
+                        @:Free
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.TicketCost)
+                    }
+                </td>
                 <td class="truncate" title="@item.Order">
-                @Html.DisplayFor(modelItem => item.Order)
+                    @Html.DisplayFor(modelItem => item.Order)
+                </td>
+
+                @*
+            <td>
+            @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Telephone)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
             </td>
 
-            @*
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telephone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerName)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.InternalNote)
+            @Html.DisplayFor(modelItem => item.InternalNote)
             </td>
             *@
-            <td>
+                <td>
                     @Html.DisplayFor(modelItem => item.PassangerNo)
-            </td>
+                </td>
 
-               <td style="@(
-                item.CheckTransport.HasValue 
-                ? (item.CheckTransport.Value ? "background-color: yellow;" : "background-color: lightgreen;") 
+                <td style="@(
+                item.CheckTransport.HasValue
+                ? (item.CheckTransport.Value ? "background-color: yellow;" : "background-color: lightgreen;")
                 : "background-color: gray;"
              )">
-    @(item.CheckTransport.HasValue ? (item.CheckTransport.Value ? "Check-in" : "Check-out") : "Not boarded")
-</td>
+                    @(item.CheckTransport.HasValue ? (item.CheckTransport.Value ? "Check-in" : "Check-out") : "Not boarded")
+                </td>
 
 
 
                 <td style="@((item.Status.HasValue && item.Status.Value) ? "background-color: green;" : "background-color: red;")">
                     @(item.Status.HasValue ? (item.Status.Value ? "Active" : "Inactive") : "N/A")
-                    </td>
-            
-                @*
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndTime)
-                </td>
-                *@
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.PurchaseDate)
-                </td>
+             
+                @*
+            <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+
+            <td>
+            @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            *@
                 <td>
                     <!-- Check In Button -->
                     <form asp-action="CheckIn" method="post" style="display:inline;">
                         <input type="hidden" name="Id" value="@item.Id" />
-                        <button type="submit" class="btn btn-success" @(item.CheckTransport.HasValue && item.CheckTransport.Value ? "disabled" : "")>Check In</button>
+                        <button type="submit" class="btn btn-warning" @(item.CheckTransport.HasValue && item.CheckTransport.Value ? "disabled" : "")>Chk-In</button>
                     </form>
 
                     <!-- Check Out Button -->
                     <form asp-action="CheckOut" method="post" style="display:inline;">
                         <input type="hidden" name="Id" value="@item.Id" />
-                        <button type="submit" class="btn btn-warning" @(item.CheckTransport.HasValue && !item.CheckTransport.Value ? "disabled" : "")>Check Out</button>
+                        <button type="submit" class="btn btn-secondary" @(item.CheckTransport.HasValue && !item.CheckTransport.Value ? "disabled" : "")>Chk-Out</button>
                     </form>
                 </td>
-            <td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
-            </td>
-        </tr>
-}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 

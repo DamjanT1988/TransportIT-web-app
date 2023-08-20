@@ -43,11 +43,11 @@ namespace KnowIT_TransportIT_webapp.Models
         [Display(Name = "Internal notes")]
         public string? InternalNote { get; set; }
 
-        [Display(Name = "Start Date:")]
+        [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
         public DateTime? StartDate { get; set; }
 
-        [Display(Name = "End Date:")]
+        [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public DateTime? EndDate { get; set; }
 

@@ -84,16 +84,52 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 if (billingModel.PurchaseDate >= freeDay.StartDateFreeDay && billingModel.PurchaseDate <= freeDay.EndDateFreeDay)
                 {
                     billingModel.TicketCost = 0; // Set ticket cost to 0
+
+                    // Add information to the ticket indicating it's free
+                    billingModel.Order = $"FREE ON DAY {billingModel.PurchaseDate.Value.ToShortDateString()}";
+
                     break; // No need to check further if we found a match
                 }
             }
-
-        //PART check total amount for passanger
 
             // Check if the TicketCost is more than 200
             if (billingModel.TicketCost > 200)
             {
                 billingModel.TicketCost = 200;
+                billingModel.Order = $"FREE REST OF DAY {billingModel.PurchaseDate.Value.ToShortDateString()}";
+            }
+
+            // Overlapping days scenario
+            if (billingModel.StartDate != billingModel.EndDate)
+            {
+                var costDay1 = _context.BillingModel
+                                       .Where(b => b.PassangerNo == billingModel.PassangerNo && b.PurchaseDate == billingModel.StartDate)
+                                       .Sum(b => b.TicketCost);
+
+                var costDay2 = _context.BillingModel
+                                       .Where(b => b.PassangerNo == billingModel.PassangerNo && b.PurchaseDate == billingModel.EndDate)
+                                       .Sum(b => b.TicketCost);
+
+                if (costDay2 > costDay1)
+                {
+                    billingModel.PurchaseDate = billingModel.EndDate;
+                }
+                else
+                {
+                    billingModel.PurchaseDate = billingModel.StartDate;
+                }
+            }
+
+            //PART check total amount for passanger
+            // First, fetch the total amount already spent by the passenger on the given day
+            var totalSpentToday = _context.BillingModel
+                                          .Where(b => b.PassangerNo == billingModel.PassangerNo && b.PurchaseDate == billingModel.PurchaseDate)
+                                          .Sum(b => b.TicketCost);
+
+            // If the totalSpentToday and the current ticket cost exceeds 200, adjust the current ticket cost
+            if (totalSpentToday + billingModel.TicketCost > 200)
+            {
+                billingModel.TicketCost = 200 - totalSpentToday;
             }
 
 
