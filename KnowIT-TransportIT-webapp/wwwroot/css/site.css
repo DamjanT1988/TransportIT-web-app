@@ -21,6 +21,10 @@ body.dark-mode {
     width: 80px;
 }
 
+#refresh {
+    padding-top: 7px;
+}
+
 /*BUTTONS*/
 .btn-primary {
     background-color: navy;
