@@ -109,13 +109,16 @@ namespace KnowIT_TransportIT_webapp.Controllers
 
             // Calculate the total amount spent by the passenger for the day.
             var totalSpentToday = _context.BillingModel
-                                          .Where(b => b.PassangerNo == billingModel.PassangerNo && b.PurchaseDate == billingModel.PurchaseDate)
+                                          .Where(b => b.PassangerNo == billingModel.PassangerNo &&
+                                                      b.PurchaseDate.Value.Date == billingModel.PurchaseDate.Value.Date)
                                           .Sum(b => b.TicketCost);
+
 
             // Adjust the TicketCost if the combined total exceeds 200.
             if (totalSpentToday + billingModel.TicketCost > 200)
             {
-                billingModel.TicketCost = 200 - totalSpentToday;
+                billingModel.TicketCost = 0;
+                billingModel.Order = $"SPENT MORE THAN 200 SEK - FREE REST OF DAY {billingModel.PurchaseDate.Value.ToShortDateString()}";
             }
 
             // Validate model state, save changes, and redirect to the index page.

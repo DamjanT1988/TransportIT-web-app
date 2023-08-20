@@ -15,7 +15,7 @@ $(document).ready(function () {
             $("#darkModeToggle").text("LIGHT MODE");
             localStorage.setItem("theme", "dark-mode");
         } else {
-            $("#darkModeToggle").text("DARK MODE");
+            $("#darkModeToggle").text("DIMM MODE");
             localStorage.removeItem("theme");
         }
     });
