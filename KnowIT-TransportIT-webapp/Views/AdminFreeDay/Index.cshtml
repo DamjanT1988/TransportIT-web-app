@@ -28,25 +28,26 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-                <td class="truncate" title="@item.FreeDayReason">
-                @Html.DisplayFor(modelItem => item.FreeDayReason)
-            </td>
-                <td style="@((item.StatusFreeDay.HasValue && item.StatusFreeDay.Value) ? "background-color: green;" : "background-color: red;")">
-                    @(item.StatusFreeDay.HasValue ? (item.StatusFreeDay.Value ? "Active" : "Inactive") : "N/A")
+        @foreach (var item in Model)
+        {
+            <tr>
+                    <td class="truncate" title="@item.FreeDayReason">
+                    @Html.DisplayFor(modelItem => item.FreeDayReason)
                 </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDateFreeDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDateFreeDay)
-            </td>
-            <td>
-                    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+                    <td style="@((item.StatusFreeDay.HasValue && item.StatusFreeDay.Value) ? "background-color: green;" : "background-color: red;")">
+                    @(item.StatusFreeDay.HasValue ? (item.StatusFreeDay.Value ? "Active" : "Inactive") : "N/A")
+                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDateFreeDay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDateFreeDay)
+                </td>
+                <td>
+                        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -16,7 +16,7 @@ namespace KnowIT_TransportIT_webapp.Models
         public string? TripTitle { get; set; }
 
         [Required]
-        [Display(Name = "Ticket ID no. (sorted)")]
+        [Display(Name = "Ticket ID no.")]
         public int? TicketNumber { get; set; }
 
         [Required]

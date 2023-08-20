@@ -51,7 +51,6 @@ namespace KnowIT_TransportIT_webapp.Controllers
         }
 
         // PUT: api/Billing/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBillingModel(int id, BillingModel billingModel)
         {
@@ -82,7 +81,6 @@ namespace KnowIT_TransportIT_webapp.Controllers
         }
 
         // POST: api/Billing
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<BillingModel>> PostBillingModel(BillingModel billingModel)
         {

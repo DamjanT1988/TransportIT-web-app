@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql5": {
+      "secretStore": "AzureAppSettings",
+      "type": "mssql.onprem",
+      "connectionId": "ConnectionStrings:UserContext",
+      "dynamicId": null
+    }
+  }
+}

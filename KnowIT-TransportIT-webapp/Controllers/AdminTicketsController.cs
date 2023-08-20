@@ -56,8 +56,6 @@ namespace KnowIT_TransportIT_webapp.Controllers
         }
 
         // POST: AdminTickets/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TripTitle,TicketNumber,TicketDescription,Price,TicketAvailable,Category,WeekDay, ImagePath")] TicketsModel ticketsModel)
@@ -88,17 +86,15 @@ namespace KnowIT_TransportIT_webapp.Controllers
         }
 
         // POST: AdminTickets/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,TripTitle,TicketNumber,TicketDescription,Price,TicketAvailable,Category,WeekDay")] TicketsModel ticketsModel)
         {
-            /*
+            
             if (id != ticketsModel.Id)
             {
                 return NotFound();
-            }*/
+            }
 
             if (ModelState.IsValid)
             {

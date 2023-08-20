@@ -19,9 +19,6 @@
                 @Html.DisplayNameFor(model => model.PassangerSocNo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PassangerPassword)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.PassangerEmail)
             </th>
             <th>
@@ -34,39 +31,29 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PassangerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PassangerSocNo)
-            </td>
-
-            <td>
-                @if (!string.IsNullOrEmpty(item.PassangerPassword))
-                {
-                    @:Password exists
-                }
-                else {
-                    @:No password
-                }
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.PassangerEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PassangerTel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationAccount)
-            </td>
-            <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PassangerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PassangerSocNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PassangerEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PassangerTel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationAccount)
+                </td>
+                <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

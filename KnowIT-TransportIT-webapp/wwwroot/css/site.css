@@ -4,40 +4,26 @@ body {
     color: #000000;
 }
 
-    /* Dark Theme */
-    body.dark-mode {
-        background-color: #c1c1c2;
-    }
-
-/* You can also adjust other elements for dark mode if necessary, e.g. */
-footer {
-    background-color: #FFFFFF;
-}
-
 html {
     font-size: 18px;
     font-family: 'Arial Narrow', Arial, sans-serif;
 }
 
-.control-label {
-    font-weight: 700;
-    margin-bottom: 7.5px;
-    margin-top: 20px;
-    font-size: 1.2em;
+/*DARK MODE*/
+body.dark-mode {
+    background-color: #c1c1c2;
 }
 
+#logout, #refresh, #darkModeToggle {
+    margin-top: 6px;
+    margin-left: 10px;
+    height: 65px;
+    width: 80px;
+}
+
+/*BUTTONS*/
 .btn-primary {
     background-color: navy;
-}
-
-.navbar-nav {
-    font-weight: 700;
-    margin-top: 5px;
-}
-
-.form-control {
-    font-weight: 100;
-    font-size: 1.35em;
 }
 
 .btn {
@@ -46,12 +32,15 @@ html {
     padding: 4px;
 }
 
-.productImages {
-    max-width: 40%;
+.form-control {
+    font-weight: 100;
+    font-size: 1.35em;
 }
 
-th {
-    font-size: 0.8em;
+/* NAVBAR */
+.navbar-nav {
+    font-weight: 700;
+    margin-top: 5px;
 }
 
 .navbar-brand {
@@ -70,13 +59,12 @@ th {
     transition: background-color 0.3s, color 0.3s;
     margin-right: 5px;
 }
-
     
-    #tickets:hover, #billings:hover, #passangers:hover, #freeday:hover, #manage:hover, #login:hover, #register:hover {
-        text-decoration: none;
-        color: white;
-        background-color: #d3d3d3; /* Light gray */
-    }
+#tickets:hover, #billings:hover, #passangers:hover, #freeday:hover, #manage:hover, #login:hover, #register:hover {
+    text-decoration: none;
+    color: white;
+    background-color: #d3d3d3;
+}
 
 #tickets {
     background-color: lightcoral;
@@ -107,15 +95,14 @@ th {
     background-color: #8bc34a; 
 }
 
-
-
+/* FORM LIST/MENU*/
 select.form-control {
     display: block;
     width: 100%;
     padding: 0.375rem 1.75rem 0.375rem 0.75rem;
     border: 1px solid #ced4da;
     border-radius: 0.25rem;
-    appearance: none; /* Removes default browser styling */
+    appearance: none;
     background-color: #fff;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
@@ -123,18 +110,39 @@ select.form-control {
     background-size: 16px;
 }
 
+th {
+    font-size: 0.8em;
+}
 
+.control-label {
+    font-weight: 700;
+    margin-bottom: 7.5px;
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+/*OVERFLOW MANAGEMENT*/
+.truncate {
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+footer {
+    background-color: #FFFFFF;
+}
 
 
 
 @media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
+html {
+    font-size: 16px;
+}
 
-    header {
-        font-size: 18px;
-    }
+header {
+    font-size: 18px;
+}
 }
 
 html {
@@ -144,20 +152,6 @@ html {
 
 body {
     margin-bottom: 60px;
-}
-
-#logout, #refresh, #darkModeToggle {
-    margin-top: 6px;
-    margin-left: 10px;
-    height: 65px;
-    width: 80px;
-}
-
-.truncate {
-    max-width: 200px; /* or whatever width you desire */
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 

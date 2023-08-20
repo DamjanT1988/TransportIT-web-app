@@ -15,6 +15,11 @@
     "mssql4": {
       "type": "mssql",
       "connectionId": "ConnectionStrings:FreeDayContext"
+    },
+    "mssql5": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:UserContext",
+      "dynamicId": null
     }
   }
 }

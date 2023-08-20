@@ -15,7 +15,7 @@ namespace KnowIT_TransportIT_webapp.Models
         public string? FreeDayReason { get; set; }
 
         [Required]
-        [Display(Name = "Active?")]
+        [Display(Name = "Active/inactive")]
         public bool? StatusFreeDay { get; set; }
 
         [Display(Name = "Start date")]
