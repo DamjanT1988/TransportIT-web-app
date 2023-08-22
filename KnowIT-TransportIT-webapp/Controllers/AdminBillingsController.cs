@@ -60,7 +60,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,PassangerNo,CheckTransport,Status,InternalNote, StartDate, EndDate, StartTime, EndTime,  PurchaseDate")] BillingModel billingModel)
+        public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,PassangerNo,CheckTransport,Status,StartDate, EndDate, StartTime, EndTime,  PurchaseDate")] BillingModel billingModel)
         {
             // Default PurchaseDate to the current system date if not set.
             if (billingModel.PurchaseDate == null)
@@ -68,7 +68,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 billingModel.PurchaseDate = DateTime.Now;
             }
 
-            // Retrieve all FreeDays from the service.
+            // Retrieve all FreeDays from the service and FreeDay db
             var freeDays = _service.GetFreeDays() ?? new List<FreeDayClass>();
 
             // Determine if the PurchaseDate is within a FreeDay range.
@@ -83,13 +83,6 @@ namespace KnowIT_TransportIT_webapp.Controllers
 
                     break; // Terminate the loop if a matching FreeDay is found.
                 }
-            }
-
-            // Cap the TicketCost at 200.
-            if (billingModel.TicketCost > 200)
-            {
-                billingModel.TicketCost = 200;
-                billingModel.Order = $"FREE REST OF DAY {billingModel.PurchaseDate.Value.ToShortDateString()}";
             }
 
             // Handle fares that overlap two days.
@@ -113,12 +106,16 @@ namespace KnowIT_TransportIT_webapp.Controllers
                                                       b.PurchaseDate.Value.Date == billingModel.PurchaseDate.Value.Date)
                                           .Sum(b => b.TicketCost);
 
-
             // Adjust the TicketCost if the combined total exceeds 200.
-            if (totalSpentToday + billingModel.TicketCost > 200)
+            if (billingModel.TicketCost >= 200)
             {
-                billingModel.TicketCost = 0;
-                billingModel.Order = $"SPENT MORE THAN 200 SEK - FREE REST OF DAY {billingModel.PurchaseDate.Value.ToShortDateString()}";
+                billingModel.TicketCost = 200;
+                billingModel.Order = $"FREE REST OF DAY - SPENT 200 SEK. DAY {billingModel.PurchaseDate.Value.ToShortDateString()}";
+            }
+            else if (totalSpentToday + billingModel.TicketCost >= 200)
+            {
+                billingModel.TicketCost = 200 - totalSpentToday;
+                billingModel.Order = $"FREE REST OF DAY - SPENT MORE THAN 200 SEK TODAY ON {billingModel.PurchaseDate.Value.ToShortDateString()}";
             }
 
             // Validate model state, save changes, and redirect to the index page.
@@ -152,7 +149,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
         // POST: AdminBillings/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TicketCost,Order,Email,Telephone,CustomerName,PassangerNo,CheckTransport,Status,InternalNote, StartDate, EndDate, StartTime, EndTime, PurchaseDate")] BillingModel billingModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TicketCost,Order,PassangerNo,CheckTransport,Status, StartDate, EndDate, StartTime, EndTime, PurchaseDate")] BillingModel billingModel)
         {
             if (id != billingModel.Id)
             {
