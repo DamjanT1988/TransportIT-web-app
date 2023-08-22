@@ -29,7 +29,7 @@
 
             <!-- Input field for Ticket Cost -->
             <div class="form-group">
-                <label asp-for="TicketCost" class="control-label"></label> (ticket number in information calculates)
+                <label asp-for="TicketCost" class="control-label"></label> <br />(ticket number in information calculates)
                 <input asp-for="TicketCost" class="form-control" />
                 <span asp-validation-for="TicketCost" class="text-danger"></span>
             </div>
@@ -69,7 +69,7 @@
 
             <!-- Input field for Purchase Date with default to today if no input -->
             <div class="form-group">
-                <label asp-for="PurchaseDate" class="control-label"></label> (No input = today)
+                <label asp-for="PurchaseDate" class="control-label"></label> <br />(No input = today)
                 <input asp-for="PurchaseDate" type="date" class="form-control" />
                 <span asp-validation-for="PurchaseDate" class="text-danger"></span>
             </div>

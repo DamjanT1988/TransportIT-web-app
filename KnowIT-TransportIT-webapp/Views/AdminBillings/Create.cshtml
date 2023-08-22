@@ -21,14 +21,14 @@
 
             <!-- Textarea for Order details -->
             <div class="form-group">
-                <label asp-for="Order" class="control-label"></label> (Enterr ticket number only or other text)
+                <label asp-for="Order" class="control-label"></label> <br />(Enter ticket number only, or explainatory text)
                 <textarea asp-for="Order" class="form-control"></textarea>
                 <span asp-validation-for="Order" class="text-danger"></span>
             </div>
 
             <!-- Input field for Ticket Cost -->
             <div class="form-group">
-                <label asp-for="TicketCost" class="control-label"></label> (no input = ticket number needed above)
+                <label asp-for="TicketCost" class="control-label"></label> <br />(no input = ticket number needed above)
                 <input asp-for="TicketCost" class="form-control" />
                 <span asp-validation-for="TicketCost" class="text-danger"></span>
             </div>
@@ -76,7 +76,7 @@
 
             <!-- Input field for Purchase Date with default to today if no input -->
             <div class="form-group">
-                <label asp-for="PurchaseDate" class="control-label"></label> (No input = today)
+                <label asp-for="PurchaseDate" class="control-label"></label> <br />(No input = today)
                 <input asp-for="PurchaseDate" type="date" class="form-control" />
                 <span asp-validation-for="PurchaseDate" class="text-danger"></span>
             </div>
