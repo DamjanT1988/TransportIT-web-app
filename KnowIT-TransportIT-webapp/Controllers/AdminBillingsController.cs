@@ -85,20 +85,90 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 }
             }
 
-            // Handle fares that overlap two days.
+
+            // Checking if the billing model overlaps two different days.
+            // This situation arises when a fare or journey begins on one day and ends on another.
             if (billingModel.StartDate != billingModel.EndDate)
             {
-                var costDay1 = _context.BillingModel
-                                       .Where(b => b.PassangerNo == billingModel.PassangerNo && b.PurchaseDate == billingModel.StartDate)
-                                       .Sum(b => b.TicketCost);
+                // Fetch all available tickets using the provided service method.
+                var tickets = _service.GetTickets();
 
-                var costDay2 = _context.BillingModel
-                                       .Where(b => b.PassangerNo == billingModel.PassangerNo && b.PurchaseDate == billingModel.EndDate)
-                                       .Sum(b => b.TicketCost);
+                // Check if the journey's StartDate is within the range of any FreeDay.
+                bool isStartDateFree = freeDays.Any(fd => billingModel.StartDate >= fd.StartDateFreeDay && billingModel.StartDate <= fd.EndDateFreeDay);
+                // Similarly, check if the journey's EndDate falls within a FreeDay.
+                bool isEndDateFree = freeDays.Any(fd => billingModel.EndDate >= fd.StartDateFreeDay && billingModel.EndDate <= fd.EndDateFreeDay);
 
-                // Determine the date with the higher cost.
-                billingModel.PurchaseDate = (costDay2 > costDay1) ? billingModel.EndDate : billingModel.StartDate;
+                double costDay1 = 0; // Initialize the total cost for StartDate
+
+                // If the StartDate isn't a FreeDay, we compute the costs associated with that day.
+                if (!isStartDateFree)
+                {
+                    // Retrieve all tickets purchased by the passenger on the StartDate.
+                    var ticketsForDay1 = _context.BillingModel
+                                                 .Where(b => b.PassangerNo == billingModel.PassangerNo && b.PurchaseDate == billingModel.StartDate)
+                                                 .ToList();
+
+                    // Loop through each ticket to calculate the total cost.
+                    foreach (var ticket in ticketsForDay1)
+                    {
+                        int orderNumber;
+                        // Try parsing the ticket's Order string to extract the ticket number.
+                        if (int.TryParse(ticket.Order, out orderNumber))
+                        {
+                            // Find the corresponding ticket details from the fetched ticket list.
+                            var matchingTicket = tickets.FirstOrDefault(t => t.TicketNumber == orderNumber);
+                            if (matchingTicket != null)
+                            {
+                                // Add the ticket's price to the day's total cost.
+                                costDay1 += matchingTicket.Price.Value;
+                            }
+                        }
+                    }
+                }
+
+                double costDay2 = 0; // Initialize the total cost for EndDate
+
+                // If the EndDate isn't a FreeDay, we compute the costs associated with that day.
+                if (!isEndDateFree)
+                {
+                    // Retrieve all tickets purchased by the passenger on the EndDate.
+                    var ticketsForDay2 = _context.BillingModel
+                                                 .Where(b => b.PassangerNo == billingModel.PassangerNo && b.PurchaseDate == billingModel.EndDate)
+                                                 .ToList();
+
+                    // Loop through each ticket to calculate the total cost.
+                    foreach (var ticket in ticketsForDay2)
+                    {
+                        int orderNumber;
+                        // Try parsing the ticket's Order string to extract the ticket number.
+                        if (int.TryParse(ticket.Order, out orderNumber))
+                        {
+                            // Find the corresponding ticket details from the fetched ticket list.
+                            var matchingTicket = tickets.FirstOrDefault(t => t.TicketNumber == orderNumber);
+                            if (matchingTicket != null)
+                            {
+                                // Add the ticket's price to the day's total cost.
+                                costDay2 += matchingTicket.Price.Value;
+                            }
+                        }
+                    }
+                }
+
+                // If both the StartDate and EndDate are FreeDays, set the fare to be free of charge.
+                if (isStartDateFree && isEndDateFree)
+                {
+                    billingModel.TicketCost = 0;
+                    billingModel.Order = $"FREE ON BOTH DAYS {billingModel.StartDate.Value.ToShortDateString()} and {billingModel.EndDate.Value.ToShortDateString()}";
+                }
+                else
+                {
+                    // If only one of the days is a FreeDay, then we set the PurchaseDate to the day with the higher ticket cost.
+                    billingModel.PurchaseDate = (costDay2 > costDay1) ? billingModel.EndDate : billingModel.StartDate;
+                }
             }
+
+
+
 
             // Calculate the total amount spent by the passenger for the day.
             var totalSpentToday = _context.BillingModel
