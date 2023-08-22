@@ -11,6 +11,7 @@ public class Service
     private readonly PassangerContext _passangerContext;
     private readonly TicketsContext _ticketsContext;
 
+    /*
     public Service(BillingContext billingContext,
                           FreeDayContext freeDayContext,
                           PassangerContext passangerContext,
@@ -20,12 +21,16 @@ public class Service
         _freeDayContext = freeDayContext;
         _passangerContext = passangerContext;
         _ticketsContext = ticketsContext;
-    }
+    }*/
 
     public List<FreeDayClass> GetFreeDays()
     {
         return _freeDayContext.FreeDayClass.ToList();
     }
 
-    // You can add other methods to interact with PassangerContext and TicketsContext
+    public List<TicketsModel> GetTickets()
+    {
+        return _ticketsContext.TicketsClass.ToList();
+    }
+
 }
