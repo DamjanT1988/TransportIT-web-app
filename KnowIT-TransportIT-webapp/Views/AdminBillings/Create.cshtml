@@ -21,14 +21,14 @@
 
             <!-- Textarea for Order details -->
             <div class="form-group">
-                <label asp-for="Order" class="control-label"></label>
+                <label asp-for="Order" class="control-label"></label> (Enterr ticket number only or other text)
                 <textarea asp-for="Order" class="form-control"></textarea>
                 <span asp-validation-for="Order" class="text-danger"></span>
             </div>
 
             <!-- Input field for Ticket Cost -->
             <div class="form-group">
-                <label asp-for="TicketCost" class="control-label"></label>
+                <label asp-for="TicketCost" class="control-label"></label> (no input = ticket number needed above)
                 <input asp-for="TicketCost" class="form-control" />
                 <span asp-validation-for="TicketCost" class="text-danger"></span>
             </div>

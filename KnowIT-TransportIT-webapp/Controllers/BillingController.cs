@@ -15,10 +15,12 @@ namespace KnowIT_TransportIT_webapp.Controllers
     public class BillingController : ControllerBase
     {
         private readonly BillingContext _context;
+        private readonly Service _service;
 
-        public BillingController(BillingContext context)
+        public BillingController(BillingContext context, Service service)
         {
             _context = context;
+            _service = service;
         }
 
         // GET: api/Billing
@@ -92,7 +94,27 @@ namespace KnowIT_TransportIT_webapp.Controllers
             //set purchase date and ticket status
             billingModel.PurchaseDate = DateTime.Now;
             billingModel.Status = true;
-            
+
+            var tickets = _service.GetTickets();
+
+            // Check if Order string exists and if TicketCost is null or not set
+            if (!string.IsNullOrWhiteSpace(billingModel.Order) && !billingModel.TicketCost.HasValue)
+            {
+                // Try to parse the Order string to get the ticket number
+                if (int.TryParse(billingModel.Order, out int orderNumber))
+                {
+                    var matchingTicket = tickets.FirstOrDefault(t => t.TicketNumber == orderNumber);
+                    if (matchingTicket != null)
+                    {
+                        billingModel.TicketCost = matchingTicket.Price.Value;
+                        billingModel.CheckTransport = null;
+                        billingModel.Status = true;
+
+                        // Update the Order string with the Category information
+                        billingModel.Order += $" - {matchingTicket.Category} on {matchingTicket.WeekDay}";
+                    }
+                }
+            }
 
             _context.BillingModel.Add(billingModel);
             await _context.SaveChangesAsync();

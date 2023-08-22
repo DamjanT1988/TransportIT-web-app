@@ -21,7 +21,7 @@ namespace KnowIT_TransportIT_webapp.Models
         public string? Order { get; set; }
 
         // Represents the cost of the ticket. It's a nullable double property.
-        [Required]
+        //[Required]
         [Display(Name = "Ticket cost")]
         public double? TicketCost { get; set; }
 

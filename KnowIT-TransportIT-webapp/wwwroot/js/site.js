@@ -25,6 +25,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#sortableTable').DataTable({
         "pageLength": 11, //specify defaultlenght of table
-        "lengthMenu": [[10, 20, 30, 50, 100, -1], [10, 20, 30, 50, 100, "All"]] //specify the various table options, in menu
+        "lengthMenu": [[10, 20, 30, 50, 100, -1], [10, 20, 30, 50, 100, "All"]], //specify the various table options, in menu
+        "stateSave": true // save state - paging, ordering, and search settings
     });
 });

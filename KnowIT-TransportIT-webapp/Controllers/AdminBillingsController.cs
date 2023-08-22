@@ -62,40 +62,62 @@ namespace KnowIT_TransportIT_webapp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,PassangerNo,CheckTransport,Status,StartDate, EndDate, StartTime, EndTime,  PurchaseDate")] BillingModel billingModel)
         {
-            // Default PurchaseDate to the current system date if not set.
+            // Default PurchaseDate to the current system date if not set
             if (billingModel.PurchaseDate == null)
             {
                 billingModel.PurchaseDate = DateTime.Now;
             }
 
+            var tickets = _service.GetTickets();
+
+            // Check if Order string exists and if TicketCost is null or not set
+            if (!string.IsNullOrWhiteSpace(billingModel.Order) && !billingModel.TicketCost.HasValue)
+            {
+                // Try to parse the Order string to get the ticket number
+                if (int.TryParse(billingModel.Order, out int orderNumber))
+                {
+                    var matchingTicket = tickets.FirstOrDefault(t => t.TicketNumber == orderNumber);
+                    if (matchingTicket != null)
+                    {
+                        billingModel.TicketCost = matchingTicket.Price.Value;
+                        billingModel.CheckTransport = null;
+                        billingModel.Status = true;
+
+                        // Update the Order string with the Category information
+                        billingModel.Order += $" - {matchingTicket.Category} on {matchingTicket.WeekDay}";
+                    }
+                }
+            }
+
+
             // Retrieve all FreeDays from the service and FreeDay db
             var freeDays = _service.GetFreeDays() ?? new List<FreeDayClass>();
 
-            // Determine if the PurchaseDate is within a FreeDay range.
+            // Determine if the PurchaseDate is within a FreeDay range
             foreach (var freeDay in freeDays)
             {
                 if (billingModel.PurchaseDate >= freeDay.StartDateFreeDay && billingModel.PurchaseDate <= freeDay.EndDateFreeDay)
                 {
                     billingModel.TicketCost = 0;
 
-                    // Mark the ticket as free with the respective date.
+                    // Mark the ticket as free with the respective date
                     billingModel.Order = $"FREE ON DAY {billingModel.PurchaseDate.Value.ToShortDateString()}";
 
-                    break; // Terminate the loop if a matching FreeDay is found.
+                    break; // Terminate the loop if a matching FreeDay is found
                 }
             }
 
 
-            // Checking if the billing model overlaps two different days.
-            // This situation arises when a fare or journey begins on one day and ends on another.
+            // Checking if the billing model overlaps two different days
+            // This situation arises when a fare or journey begins on one day and ends on another
             if (billingModel.StartDate != billingModel.EndDate)
             {
-                // Fetch all available tickets using the provided service method.
-                var tickets = _service.GetTickets();
+                // Fetch all available tickets using the provided service method
+                //var tickets = _service.GetTickets();
 
-                // Check if the journey's StartDate is within the range of any FreeDay.
+                // Check if the journey's StartDate is within the range of any FreeDay
                 bool isStartDateFree = freeDays.Any(fd => billingModel.StartDate >= fd.StartDateFreeDay && billingModel.StartDate <= fd.EndDateFreeDay);
-                // Similarly, check if the journey's EndDate falls within a FreeDay.
+                // Similarly, check if the journey's EndDate falls within a FreeDay
                 bool isEndDateFree = freeDays.Any(fd => billingModel.EndDate >= fd.StartDateFreeDay && billingModel.EndDate <= fd.EndDateFreeDay);
 
                 double costDay1 = 0; // Initialize the total cost for StartDate
@@ -154,7 +176,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
                     }
                 }
 
-                // If both the StartDate and EndDate are FreeDays, set the fare to be free of charge.
+                // If both the StartDate and EndDate are FreeDays, set the fare to be free of charge
                 if (isStartDateFree && isEndDateFree)
                 {
                     billingModel.TicketCost = 0;
@@ -167,16 +189,13 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 }
             }
 
-
-
-
-            // Calculate the total amount spent by the passenger for the day.
+            // Calculate the total amount spent by the passenger for the day
             var totalSpentToday = _context.BillingModel
                                           .Where(b => b.PassangerNo == billingModel.PassangerNo &&
                                                       b.PurchaseDate.Value.Date == billingModel.PurchaseDate.Value.Date)
                                           .Sum(b => b.TicketCost);
 
-            // Adjust the TicketCost if the combined total exceeds 200.
+            // Adjust the TicketCost if the combined total exceeds 200
             if (billingModel.TicketCost >= 200)
             {
                 billingModel.TicketCost = 200;
