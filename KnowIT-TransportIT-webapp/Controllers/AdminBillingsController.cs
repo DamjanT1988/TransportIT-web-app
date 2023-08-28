@@ -110,10 +110,10 @@ namespace KnowIT_TransportIT_webapp.Controllers
 
             // Checking if the billing model overlaps two different days
             // This situation arises when a fare or journey begins on one day and ends on another
-            if (billingModel.StartDate != billingModel.EndDate)
+            if (billingModel.StartDate != billingModel.EndDate || billingModel.StartDate == billingModel.EndDate) //EDIT - ADDED ||
             {
                 // Fetch all available tickets using the provided service method
-                //var tickets = _service.GetTickets();
+                //var tickets2 = _service.GetTickets();
 
                 // Check if the journey's StartDate is within the range of any FreeDay
                 bool isStartDateFree = freeDays.Any(fd => billingModel.StartDate >= fd.StartDateFreeDay && billingModel.StartDate <= fd.EndDateFreeDay);
@@ -121,6 +121,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 bool isEndDateFree = freeDays.Any(fd => billingModel.EndDate >= fd.StartDateFreeDay && billingModel.EndDate <= fd.EndDateFreeDay);
 
                 double costDay1 = 0; // Initialize the total cost for StartDate
+
 
                 // If the StartDate isn't a FreeDay, we compute the costs associated with that day.
                 if (!isStartDateFree)
@@ -176,8 +177,15 @@ namespace KnowIT_TransportIT_webapp.Controllers
                     }
                 }
 
+
+
                 // If both the StartDate and EndDate are FreeDays, set the fare to be free of charge
-                if (isStartDateFree && isEndDateFree)
+                if (isEndDateFree && isStartDateFree && billingModel.StartDate == billingModel.EndDate) //ADDED
+                {
+                    billingModel.TicketCost = 0;
+                    billingModel.Order = $"FREE ON DAY {billingModel.StartDate.Value.ToShortDateString()}";
+                } 
+                else if (isStartDateFree && isEndDateFree)
                 {
                     billingModel.TicketCost = 0;
                     billingModel.Order = $"FREE ON BOTH DAYS {billingModel.StartDate.Value.ToShortDateString()} and {billingModel.EndDate.Value.ToShortDateString()}";
