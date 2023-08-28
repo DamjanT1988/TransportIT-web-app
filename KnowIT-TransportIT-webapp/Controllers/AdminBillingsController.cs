@@ -110,7 +110,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
 
             // Checking if the billing model overlaps two different days
             // This situation arises when a fare or journey begins on one day and ends on another
-            if (billingModel.StartDate != billingModel.EndDate || billingModel.StartDate == billingModel.EndDate) //EDIT - ADDED ||
+            if (billingModel.StartDate != billingModel.EndDate || billingModel.StartDate == billingModel.EndDate && billingModel.EndDate != null) //EDIT - ADDED ||
             {
                 // Fetch all available tickets using the provided service method
                 //var tickets2 = _service.GetTickets();
