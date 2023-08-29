@@ -68,6 +68,8 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 billingModel.PurchaseDate = DateTime.Now;
             }
 
+
+
             // Get tickets list from db
             var tickets = _service.GetTickets();
 
@@ -94,6 +96,8 @@ namespace KnowIT_TransportIT_webapp.Controllers
             }
 
 
+
+
             // Retrieve all FreeDays from the service and FreeDay db, make new list
             var freeDays = _service.GetFreeDays() ?? new List<FreeDayClass>();
 
@@ -111,6 +115,8 @@ namespace KnowIT_TransportIT_webapp.Controllers
                     break; // Terminate the loop if a matching FreeDay is found
                 }
             }
+
+
 
 
             // Checking if the billing model overlaps two different days
@@ -203,12 +209,16 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 }
             }
 
+
+
             // Calculate the total amount spent by the passenger for the day
             var totalSpentToday = _context.BillingModel
                                           .Where(b => b.PassangerNo == billingModel.PassangerNo &&
                                                       b.PurchaseDate.Value.Date == billingModel.PurchaseDate.Value.Date)
                                           .Sum(b => b.TicketCost);
 
+            
+            
             // Adjust the TicketCost if the combined total exceeds 200
             if (billingModel.TicketCost >= 200)
             {
@@ -221,6 +231,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 billingModel.TicketCost = 200 - totalSpentToday;
                 billingModel.Order = $"FREE REST OF DAY - SPENT MORE THAN 200 SEK TODAY ON {billingModel.PurchaseDate.Value.ToShortDateString()}";
             }
+
 
             // Validate model state, save changes, and redirect to the index page.
             if (ModelState.IsValid)
