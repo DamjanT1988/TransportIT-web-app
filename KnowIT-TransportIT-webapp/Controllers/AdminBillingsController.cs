@@ -68,6 +68,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 billingModel.PurchaseDate = DateTime.Now;
             }
 
+            // Get tickets list from db
             var tickets = _service.GetTickets();
 
             // Check if Order string exists and if TicketCost is null or not set
@@ -76,7 +77,10 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 // Try to parse the Order string to get the ticket number
                 if (int.TryParse(billingModel.Order, out int orderNumber))
                 {
+                    // Match order number with ticket number
                     var matchingTicket = tickets.FirstOrDefault(t => t.TicketNumber == orderNumber);
+                    
+                    // If there is a match, set data
                     if (matchingTicket != null)
                     {
                         billingModel.TicketCost = matchingTicket.Price.Value;
@@ -90,12 +94,13 @@ namespace KnowIT_TransportIT_webapp.Controllers
             }
 
 
-            // Retrieve all FreeDays from the service and FreeDay db
+            // Retrieve all FreeDays from the service and FreeDay db, make new list
             var freeDays = _service.GetFreeDays() ?? new List<FreeDayClass>();
 
             // Determine if the PurchaseDate is within a FreeDay range
             foreach (var freeDay in freeDays)
             {
+                // Check FreeDays
                 if (billingModel.PurchaseDate >= freeDay.StartDateFreeDay && billingModel.PurchaseDate <= freeDay.EndDateFreeDay)
                 {
                     billingModel.TicketCost = 0;
@@ -109,11 +114,11 @@ namespace KnowIT_TransportIT_webapp.Controllers
 
 
             // Checking if the billing model overlaps two different days
-            // This situation arises when a fare or journey begins on one day and ends on another
+            // This situation arises when a fare begins on one day and ends on another
             if (billingModel.StartDate != billingModel.EndDate || billingModel.StartDate == billingModel.EndDate && billingModel.EndDate != null) //EDIT - ADDED ||
             {
                 // Fetch all available tickets using the provided service method
-                //var tickets2 = _service.GetTickets();
+                //var tickets = _service.GetTickets();
 
                 // Check if the journey's StartDate is within the range of any FreeDay
                 bool isStartDateFree = freeDays.Any(fd => billingModel.StartDate >= fd.StartDateFreeDay && billingModel.StartDate <= fd.EndDateFreeDay);
@@ -123,7 +128,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 double costDay1 = 0; // Initialize the total cost for StartDate
 
 
-                // If the StartDate isn't a FreeDay, we compute the costs associated with that day.
+                // If the StartDate isn't a FreeDay, compute the costs associated with that day.
                 if (!isStartDateFree)
                 {
                     // Retrieve all tickets purchased by the passenger on the StartDate.
@@ -151,7 +156,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
 
                 double costDay2 = 0; // Initialize the total cost for EndDate
 
-                // If the EndDate isn't a FreeDay, we compute the costs associated with that day.
+                // If the EndDate isn't a FreeDay, compute the costs associated with that day.
                 if (!isEndDateFree)
                 {
                     // Retrieve all tickets purchased by the passenger on the EndDate.
@@ -179,12 +184,13 @@ namespace KnowIT_TransportIT_webapp.Controllers
 
 
 
-                // If both the StartDate and EndDate are FreeDays, set the fare to be free of charge
+                // If both the StartDate and EndDate are the same day, set to 0 and update Order information
                 if (isEndDateFree && isStartDateFree && billingModel.StartDate == billingModel.EndDate) //ADDED
                 {
                     billingModel.TicketCost = 0;
                     billingModel.Order = $"FREE ON DAY {billingModel.StartDate.Value.ToShortDateString()}";
-                } 
+                }
+                // If both the StartDate and EndDate are FreeDays, set the fare to be free of charge
                 else if (isStartDateFree && isEndDateFree)
                 {
                     billingModel.TicketCost = 0;
@@ -192,8 +198,8 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 }
                 else
                 {
-                    // If only one of the days is a FreeDay, then we set the PurchaseDate to the day with the higher ticket cost.
-                    billingModel.PurchaseDate = (costDay2 > costDay1) ? billingModel.EndDate : billingModel.StartDate;
+                    // If only one of the days is a FreeDay, then set the PurchaseDate to the day with the higher ticket cost.
+                    billingModel.PurchaseDate = (costDay2 > costDay1) ? billingModel.EndDate : billingModel.StartDate; // Billing value date instead?
                 }
             }
 
@@ -209,6 +215,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
                 billingModel.TicketCost = 200;
                 billingModel.Order = $"FREE REST OF DAY - SPENT 200 SEK. DAY {billingModel.PurchaseDate.Value.ToShortDateString()}";
             }
+            // Check total amount a day
             else if (totalSpentToday + billingModel.TicketCost >= 200)
             {
                 billingModel.TicketCost = 200 - totalSpentToday;
@@ -325,19 +332,25 @@ namespace KnowIT_TransportIT_webapp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CheckIn(int id)
         {
+            // Find the billing model by ID.
             var billing = await _context.BillingModel.FindAsync(id);
 
+            // If the billing model with the given ID doesn't exist, return a NotFound result.
             if (billing == null)
             {
                 return NotFound();
             }
 
+            // Update the transport and status flags for the billing model.
             billing.CheckTransport = true;
             billing.Status = true;
 
+            // Update the billing model in the database context.
             _context.Update(billing);
+            // Save the changes to the database.
             await _context.SaveChangesAsync();
 
+            // Redirect to the Index action method.
             return RedirectToAction(nameof(Index));
         }
 
@@ -346,19 +359,25 @@ namespace KnowIT_TransportIT_webapp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CheckOut(int id)
         {
+            // Find the billing model by ID.
             var billing = await _context.BillingModel.FindAsync(id);
 
+            // If the billing model with the given ID doesn't exist, return a NotFound result.
             if (billing == null)
             {
                 return NotFound();
             }
 
+            // Update the transport and status flags for the billing model.
             billing.CheckTransport = false;
             billing.Status = false;
 
+            // Update the billing model in the database context.
             _context.Update(billing);
+            // Save the changes to the database.
             await _context.SaveChangesAsync();
 
+            // Redirect to the Index action method.
             return RedirectToAction(nameof(Index));
         }
 
