@@ -65,7 +65,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
         public async Task<IActionResult> Create([Bind("Id,TicketCost,Order,PassangerNo,CheckTransport,Status,StartDate, EndDate, StartTime, EndTime,  PurchaseDate")] BillingModel billingModel)
         {
 
-            // 1 SET PURCHASE DATE
+            // 1 SET PURCHASE DATE------------------------
 
             // Default PurchaseDate to the current system date if not set
             if (billingModel.PurchaseDate == null)
@@ -102,7 +102,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
             }
 
 
-            // 3 GET ALL FREEDAYS
+            // 3 GET ALL FREEDAYS------------------------
 
             // Retrieve all FreeDays from the service and FreeDay db, make new list
             var freeDays = _service.GetFreeDays() ?? new List<FreeDayClass>();
@@ -123,7 +123,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
             }
 
 
-            // 4 CHECK OVERLAPPING TWO-DAYS
+            // 4 CHECK OVERLAPPING TWO-DAYS------------------------
 
             // Checking if the billing model overlaps two different days
             // This situation arises when a fare begins on one day and ends on another
@@ -215,7 +215,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
             }
 
 
-            // 5 CALCULATE TOTAL COST FOR DAY
+            // 5 CALCULATE TOTAL COST FOR DAY, ADJUST COST------------------------
 
             // Calculate the total amount spent by the passenger for the day
             var totalSpentToday = _context.BillingModel
@@ -223,8 +223,6 @@ namespace KnowIT_TransportIT_webapp.Controllers
                                                       b.PurchaseDate.Value.Date == billingModel.PurchaseDate.Value.Date)
                                           .Sum(b => b.TicketCost);
 
-            
-            
             // Adjust the TicketCost if the combined total exceeds 200
             if (billingModel.TicketCost >= 200)
             {
@@ -239,7 +237,7 @@ namespace KnowIT_TransportIT_webapp.Controllers
             }
 
 
-            // 6 VALIDATE AND SAVE
+            // 7 VALIDATE AND SAVE------------------------
 
             // Validate model state, save changes, and redirect to the index page.
             if (ModelState.IsValid)
